@@ -2,10 +2,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
 import Home from "./components/pages/Home";
 import Error from "./components/pages/Error";
+import { Toaster } from "react-hot-toast";
 
 const Comp = () => {
   return (
     <BrowserRouter>
+      <Toaster />
       <title>HS Social</title>
       <link rel="icon" href="./logo.png" />
       <Routes>

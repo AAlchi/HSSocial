@@ -1,6 +1,6 @@
 import Sidebar from "../Sidebar";
 import HomePage from "../HomePage";
-import Popup from "../Popup";
+import Popup from "../../items/Popup";
 
 const Home = () => {
   return (
@@ -10,7 +10,6 @@ const Home = () => {
         className="p-5 flex justify-evenly md:gap-10 lg:gap-10"
       >
         <Sidebar />
-        <Popup />
         <HomePage />
       </div>
     </div>

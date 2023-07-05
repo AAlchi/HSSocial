@@ -4,6 +4,7 @@ interface ButtonInterface {
   disabled?: boolean;
   first?: boolean;
   second?: boolean;
+  sideBySide?: boolean;
 }
 
 const Button: React.FC<ButtonInterface> = ({
@@ -12,6 +13,7 @@ const Button: React.FC<ButtonInterface> = ({
   second,
   onClick,
   disabled,
+  sideBySide,
 }) => {
   return (
     <button
@@ -21,7 +23,7 @@ const Button: React.FC<ButtonInterface> = ({
         backgroundColor: `${first ? "red" : "white"}`,
         color: `${first ? "white" : "red"}`,
         fontWeight: "bold",
-        borderRadius: "2px",
+        borderRadius: `${sideBySide ? "0px 2px 2px 0px" : "2px"}`,
       }}
       onClick={onClick}
       disabled={disabled}

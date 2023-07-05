@@ -1,26 +1,21 @@
 import React, { useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
+import Image from "./Image";
 
 const PeopleToFollow = () => {
   const [post, setPost] = useState("");
 
   return (
     <div>
-      <div
-        style={{ height: "200px" }}
-        className="flex flex-col bg-slate-200 gap-10 p-10"
-      >
-        <h1 className="text-2xl">Make a post</h1>
-        <div className="flex">
-          <Input
-            type="text"
-            placeholder=""
-            onChange={(e) => setPost(e.target.value)}
-            value={post}
-            disabled={false}
-          />
-          <Button first onClick={() => console.log("jo")} placeholder="Post" />
+      <div className="flex flex-col bg-slate-200 gap-10 p-10">
+        <h1 className="text-2xl">Consider following</h1>
+        <div style={{ height: "270px" }} className="flex gap-3 overflow-auto">
+          <Image imageUrl="./file.jpg" imageName="file" type="rectangle" />
+          <Image imageUrl="./logo.png" imageName="file" type="rectangle" />
+          <Image imageUrl="./tech.jpg" imageName="file" type="rectangle" />
+          <Image imageUrl="./tech.jpg" imageName="file" type="rectangle" />
+          <Image imageUrl="./tech.jpg" imageName="file" type="rectangle" />
         </div>
       </div>
     </div>
