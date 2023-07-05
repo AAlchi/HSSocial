@@ -4,6 +4,7 @@ import Input from "../items/Input";
 import Button from "../items/Button";
 import CreatePost from "../items/CreatePost";
 import PeopleToFollow from "../items/PeopleToFollow";
+import Posts from "../items/Posts";
 
 const HomePage = () => {
   return (
@@ -13,6 +14,8 @@ const HomePage = () => {
     >
       <CreatePost />
       <PeopleToFollow />
+      <h2 className="text-2xl text-center">Your Feed</h2>
+      <Posts />
     </div>
   );
 };

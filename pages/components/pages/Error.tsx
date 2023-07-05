@@ -1,25 +1,32 @@
-import React from "react";
+"use client";
+import { useState } from "react";
 import Sidebar from "../Sidebar";
-
+import HomePage from "../HomePage";
+import Popup from "../../items/Popup";
+import Input from "@/pages/items/Input";
+import Button from "@/pages/items/Button";
+import { useNavigate } from "react-router-dom";
 const Error = () => {
+  const [post, setPost] = useState("");
+  const navigate = useNavigate();
+
   return (
-    <div
-      style={{ width: "100%" }}
-      className="p-5 flex justify-evenly md:gap-10 lg:gap-10"
-    >
-      <Sidebar />
+    <div className="flex w-full h-full items-center justify-center">
       <div
         style={{
-          marginTop: "40px",
-          height: "100vh",
+          marginTop: "5%",
           width: "100%",
           maxWidth: "600px",
         }}
-        className="flex justify-center md:w-3/5 lg:w-3/5"
+        className="flex flex-col bg-slate-200 gap-10 p-10"
       >
-        <h1 className="text-4xl text-center">
-          You've come come to a page we haven't go to yet... Congrats!
+        <h1 className="text-2xl">
+          You've come across a page we haven't been to yet, congrats!
         </h1>
+        <div className="flex">
+          <Button first onClick={() => navigate("/")} placeholder="Go Back" />
+          <Button second onClick={() => console.log("ok")} placeholder="Stay" />
+        </div>
       </div>
     </div>
   );
