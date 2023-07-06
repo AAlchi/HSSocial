@@ -6,7 +6,10 @@ const Spinner = (props: any) => {
   return (
     <>
       {isLoading ? (
-        <div className="absolute top-0 flex w-full h-full opacity-80 bg-black items-center justify-center">
+        <div
+          style={{ zIndex: "2000" }}
+          className="absolute top-0 flex w-full h-full opacity-80 bg-black items-center justify-center"
+        >
           <ClipLoader
             color="red"
             loading={isLoading}

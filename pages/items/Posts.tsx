@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
 import Image from "./Image";
+import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
+import { BiCommentDetail } from "react-icons/bi";
+import { MdReportProblem } from "react-icons/md";
 
 const Posts = () => {
   const [post, setPost] = useState("");
@@ -17,6 +20,31 @@ const Posts = () => {
       </div>
 
       <Image imageName="text" imageUrl="./tech.jpg" type="post" />
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ipsa,
+        atque impedit necessitatibus voluptate facilis, eveniet tenetur,
+        pariatur corporis mollitia delectus commodi explicabo error illum nam
+        cupiditate iure architecto laboriosam magnam vel? Iure qui tempore in
+        hic, voluptatem, dolorum unde ducimus, id nihil illum nesciunt nostrum
+        porro fuga. Quaerat, sed.
+      </p>
+      <div className="flex gap-5">
+        <div className="flex gap-1 cursor-pointer" title="Like">
+          <AiOutlineLike />
+          <p className="text-xs">200</p>
+        </div>
+        <div className="flex gap-1 cursor-pointer" title="Dislike">
+          <AiOutlineDislike />
+          <p className="text-xs">200</p>
+        </div>
+        <div className="flex gap-1 cursor-pointer" title="Comment">
+          <BiCommentDetail />
+          <p className="text-xs">200</p>
+        </div>
+        <div className="flex gap-1 cursor-pointer" title="Report">
+          <MdReportProblem />
+        </div>
+      </div>
     </div>
   );
 };
