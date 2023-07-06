@@ -9,14 +9,18 @@ import { FiSettings } from "react-icons/fi";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Popup from "../items/Popup";
+import zustandStore from "@/store/zustandStore";
 
 const Sidebar = () => {
+  //zustand
+
+  const authOn = zustandStore((state) => state.authOn);
+  const setAuthOn = zustandStore((state) => state.setAuthOn);
+
   const navigate = useNavigate();
 
-  const [showAuth, setShowAuth] = useState(false);
-
   const handleLogOut = () => {
-    setShowAuth(true);
+    setAuthOn(!authOn);
   };
   const takeTo = (page: string) => {
     const props = {
@@ -116,7 +120,7 @@ const Sidebar = () => {
           </li>
         </ul>
       </>
-      {showAuth && <Popup open={true} type="signup" />}
+      {authOn && <Popup open={true} type="signup" />}
     </>
   );
 };
