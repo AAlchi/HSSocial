@@ -8,7 +8,7 @@ const PeopleToFollow = () => {
 
   return (
     <div>
-      <div className="flex flex-col bg-slate-200 gap-10 p-10">
+      <div className="flex flex-col bg-slate-200 gap-10 p-7">
         <h1 className="text-2xl">Consider following</h1>
         <div style={{ height: "270px" }} className="flex gap-3 overflow-auto">
           <Image imageUrl="./file.jpg" imageName="file" type="rectangle" />
