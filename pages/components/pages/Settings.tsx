@@ -1,8 +1,7 @@
 import Sidebar from "../Sidebar";
-import HomePage from "../HomePage";
-import Popup from "../../items/Popup";
+import SettingsPage from "../SettingsPage";
 
-const Home = () => {
+const Settings = () => {
   return (
     <div className="flex justify-center">
       <div
@@ -10,10 +9,10 @@ const Home = () => {
         className="p-5 flex justify-evenly md:gap-10 lg:gap-10"
       >
         <Sidebar />
-        <HomePage />
+        <SettingsPage />
       </div>
     </div>
   );
 };
 
-export default Home;
+export default Settings;

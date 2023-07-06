@@ -12,11 +12,11 @@ const Posts = () => {
   return (
     <div
       style={{ width: "100%", maxWidth: "600px" }}
-      className="flex flex-col bg-slate-200 gap-10 p-10"
+      className="flex flex-col bg-slate-200 gap-10 p-7"
     >
-      <div className="flex justify-between">
+      <div className="flex items-center justify-between gap-2 flex-wrap">
         <h1 className="text-lg">@JohnSmith</h1>
-        <h1 className="text-lg">Jan 4 2023</h1>
+        <h1 className="text-sm">Jan 4 2023</h1>
       </div>
 
       <Image imageName="text" imageUrl="./tech.jpg" type="post" />

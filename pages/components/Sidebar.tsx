@@ -37,16 +37,14 @@ const Sidebar = () => {
             style={{ height: "600px" }}
             className="fixed hidden lg:flex md:flex justify-evenly flex-col"
           >
-            <h2 className="text-2xl">HSS</h2>
-
-            <li
-              onClick={() => takeTo("")}
+            <h2
               style={{ cursor: "pointer" }}
-              className="text-lg font-bold-10000 flex flex-row items-center gap-1"
+              onClick={() => takeTo("")}
+              className="text-2xl"
             >
-              <BiHomeAlt size={30} />{" "}
-              <div className="hidden font-bold lg:block">Home</div>
-            </li>
+              HSS
+            </h2>
+
             <li
               onClick={() => takeTo("profile")}
               style={{ cursor: "pointer" }}
@@ -56,12 +54,12 @@ const Sidebar = () => {
               <div className="hidden font-bold lg:block">Profile</div>
             </li>
             <li
-              onClick={() => takeTo("video")}
+              onClick={() => takeTo("challenge")}
               style={{ cursor: "pointer" }}
               className="text-lg font-bold-10000 flex flex-row items-center gap-1"
             >
               <BsCameraVideo size={30} />
-              <div className="hidden font-bold lg:block">HS Video</div>
+              <div className="hidden font-bold lg:block">Challenge</div>
             </li>
             <li
               onClick={() => takeTo("followers")}
@@ -80,6 +78,14 @@ const Sidebar = () => {
               <div className="hidden font-bold lg:block">Following</div>
             </li>
             <li
+              onClick={() => takeTo("settings")}
+              style={{ cursor: "pointer" }}
+              className="text-lg font-bold-10000 flex flex-row items-center gap-1"
+            >
+              <FiSettings size={30} />
+              <div className="hidden font-bold lg:block">Settings</div>
+            </li>
+            <li
               onClick={handleLogOut}
               style={{ cursor: "pointer" }}
               className="text-lg font-bold-10000 flex flex-row items-center gap-1"
@@ -95,24 +101,28 @@ const Sidebar = () => {
           className="flex md:hidden lg:hidden bg-white fixed justify-evenly p-3"
         >
           <li
+            onClick={() => takeTo("")}
             style={{ cursor: "pointer" }}
             className="text-lg font-bold-10000 flex flex-row items-center gap-1"
           >
             <BiHomeAlt size={30} />{" "}
           </li>
           <li
+            onClick={() => takeTo("profile")}
             style={{ cursor: "pointer" }}
             className="text-lg font-bold-10000 flex flex-row items-center gap-1"
           >
             <CgProfile size={30} />
           </li>
           <li
+            onClick={() => takeTo("challenge")}
             style={{ cursor: "pointer" }}
             className="text-lg font-bold-10000 flex flex-row items-center gap-1"
           >
             <BsCameraVideo size={30} />
           </li>
           <li
+            onClick={() => takeTo("settings")}
             style={{ cursor: "pointer" }}
             className="text-lg font-bold-10000 flex flex-row items-center gap-1"
           >

@@ -80,12 +80,17 @@ const Image: React.FC<ImageInterface> = ({ imageUrl, imageName, type }) => {
           src={imageUrl}
           alt={imageName}
           style={{
-            width: "200px",
-            height: "200px",
+            width: "170px",
+            height: "170px",
+            maxWidth: "170px",
+            maxHeight: "170px",
+            minWidth: "170px",
+            minHeight: "170px",
             objectFit: "cover",
             borderRadius: "20px",
             backgroundColor: "rgb(5, 5, 5, 0.3)",
             cursor: "pointer",
+            border: "3px solid white",
           }}
         />
       )}

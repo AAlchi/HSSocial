@@ -34,16 +34,19 @@ const Popup: React.FC<PopupInterface> = ({ open, type }) => {
     setIsLoading(true);
 
     try {
-      await axios.post("/api/signin", {
-        username: username,
-        password: password,
-      });
+      await axios
+        .post("/api/signin", {
+          username: username,
+          password: password,
+        })
+        .then((res) => console.log(res.data));
 
       setAuthOn(!authOn);
       setIsLoading(false);
       toast.success("All Signed In");
     } catch (err) {
-      toast.error("Something Went Wrong");
+      toast.error("Wrong username or password");
+      setIsLoading(false);
     }
   };
 
