@@ -8,6 +8,7 @@ import axios from "axios";
 import { ClipLoader } from "react-spinners";
 import Spinner from "./Spinner";
 import zustandStore from "@/store/zustandStore";
+import Image from "next/image";
 
 interface PopupInterface {
   open?: boolean;
@@ -31,40 +32,65 @@ const Popup: React.FC<PopupInterface> = ({ open, type }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSignin = async () => {
-    setIsLoading(true);
-
-    try {
-      await axios
-        .post("/api/signin", {
-          username: username,
-          password: password,
-        })
-        .then((res) => console.log(res.data));
-
-      setAuthOn(!authOn);
+    if (
+      username == "" ||
+      username == null ||
+      password == null ||
+      password == ""
+    ) {
+      toast.error("Invalid Inputs");
       setIsLoading(false);
-      toast.success("All Signed In");
-    } catch (err) {
-      toast.error("Wrong username or password");
-      setIsLoading(false);
+    } else {
+      setIsLoading(true);
+
+      try {
+        await axios
+          .post("/api/signin", {
+            username: username,
+            password: password,
+          })
+          .then((res) => console.log(res.data));
+
+        setAuthOn(!authOn);
+        setIsLoading(false);
+        toast.success("All Signed In");
+      } catch (err) {
+        toast.error("Wrong username or password");
+        setIsLoading(false);
+      }
     }
   };
 
   const handleSignup = async () => {
-    setIsLoading(true);
-    try {
-      await axios.post("/api/signup", {
-        name: name,
-        email: email,
-        username: username,
-        password: password,
-      });
-
-      setAuthOn(!authOn);
+    if (
+      username == "" ||
+      username == null ||
+      password == null ||
+      password == "" ||
+      email == "" ||
+      email == null ||
+      name == null ||
+      name == ""
+    ) {
+      toast.error("Invalid Inputs");
       setIsLoading(false);
-      toast.success("All Signed Up");
-    } catch (err) {
-      toast.error("Something Went Wrong");
+    } else {
+      setIsLoading(true);
+      try {
+        await axios.post("/api/signup", {
+          name: name,
+          email: email,
+          username: username,
+          password: password,
+        });
+
+        setAuthOn(!authOn);
+        setIsLoading(false);
+        toast.success("All Signed Up");
+      } catch (err) {
+        setIsLoading(false);
+        toast.error("User Exists. If something is wrong, please contact us.");
+      }
     }
   };
 
@@ -116,11 +142,13 @@ const Popup: React.FC<PopupInterface> = ({ open, type }) => {
                       No Account? Sign Up
                     </div>
                   </div>
-                  <img
-                    src="./tech.jpg"
+                  <Image
+                    src="/tech.jpg"
+                    width={window.innerWidth / 2}
+                    height={window.innerHeight}
                     className="hidden sm:block"
-                    style={{ objectFit: "cover" }}
-                    width="50%"
+                    style={{ objectFit: "cover", width: "50%" }}
+                    alt="image"
                   />
                 </div>
               </div>
@@ -181,11 +209,13 @@ const Popup: React.FC<PopupInterface> = ({ open, type }) => {
                       Have an Account? Sign In
                     </div>
                   </div>
-                  <img
-                    src="./tech.jpg"
+                  <Image
+                    src="/tech.jpg"
+                    height={window.innerHeight}
+                    width={window.innerWidth / 2}
                     className="hidden sm:block"
-                    style={{ objectFit: "cover" }}
-                    width="50%"
+                    style={{ objectFit: "cover", width: "50%" }}
+                    alt="image"
                   />
                 </div>
               </div>

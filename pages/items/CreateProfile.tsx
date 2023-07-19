@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
-import Image from "./Image";
+import Images from "./Images";
 
 const CreatePost = () => {
   const [post, setPost] = useState("");
@@ -26,10 +26,10 @@ const CreatePost = () => {
       >
         <div className="flex flex-col gap-5">
           <h1 className="text-2xl text-white font-bold">Test</h1>
-          <Image
+          <Images
             type="largeProfile"
             imageName="profilePic"
-            imageUrl="./tech.jpg"
+            imageUrl="/tech.jpg"
           />
         </div>
         <div className="flex items-center">

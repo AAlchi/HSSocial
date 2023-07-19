@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
-import Image from "./Image";
+import Images from "./Images";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
 import { MdReportProblem } from "react-icons/md";
@@ -19,7 +19,7 @@ const Posts = () => {
         <h1 className="text-sm">Jan 4 2023</h1>
       </div>
 
-      <Image imageName="text" imageUrl="./tech.jpg" type="post" />
+      <Images imageName="text" imageUrl="/tech.jpg" type="post" />
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ipsa,
         atque impedit necessitatibus voluptate facilis, eveniet tenetur,

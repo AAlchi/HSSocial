@@ -1,13 +1,14 @@
 "use client";
+import Image from "next/image";
 import React, { useState } from "react";
 
-interface ImageInterface {
+interface ImagesInterface {
   imageUrl: string;
   imageName: string;
   type: string;
 }
 
-const Image: React.FC<ImageInterface> = ({ imageUrl, imageName, type }) => {
+const Images: React.FC<ImagesInterface> = ({ imageUrl, imageName, type }) => {
   const [imageUrls, setImageUrls] = useState(imageUrl);
   const [imageNames, setImageNames] = useState(imageName);
   const [types, setTypes] = useState(type);
@@ -16,7 +17,9 @@ const Image: React.FC<ImageInterface> = ({ imageUrl, imageName, type }) => {
     <>
       {types == "rectangle" && (
         <div className="flex flex-col items-center justify-center">
-          <img
+          <Image
+            width="120"
+            height="200"
             src={imageUrl}
             alt={imageName}
             style={{
@@ -47,7 +50,9 @@ const Image: React.FC<ImageInterface> = ({ imageUrl, imageName, type }) => {
       )}
 
       {types == "littleProfile" && (
-        <img
+        <Image
+          height="50"
+          width="50"
           src={imageUrl}
           alt={imageName}
           style={{
@@ -62,21 +67,25 @@ const Image: React.FC<ImageInterface> = ({ imageUrl, imageName, type }) => {
       )}
 
       {types == "post" && (
-        <img
+        <Image
+          height={window.innerHeight}
+          width={window.innerWidth}
           src={imageUrl}
           alt={imageName}
           style={{
             width: "100%",
             minWidth: "100%",
             objectFit: "cover",
-            borderRadius: "10px",
+            borderRadius: "2px",
             backgroundColor: "rgb(5, 5, 5, 0.3)",
             cursor: "pointer",
           }}
         />
       )}
       {types == "largeProfile" && (
-        <img
+        <Image
+          width="170"
+          height="170"
           src={imageUrl}
           alt={imageName}
           style={{
@@ -98,4 +107,4 @@ const Image: React.FC<ImageInterface> = ({ imageUrl, imageName, type }) => {
   );
 };
 
-export default Image;
+export default Images;
