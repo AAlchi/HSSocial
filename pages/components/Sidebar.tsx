@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import { BiHomeAlt } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { BsCameraVideo } from "react-icons/bs";
@@ -10,17 +11,48 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Popup from "../items/Popup";
 import zustandStore from "@/store/zustandStore";
+import { toast } from "react-hot-toast";
+import Spinner from "../items/Spinner";
 
 const Sidebar = () => {
-  //zustand
-
   const authOn = zustandStore((state) => state.authOn);
   const setAuthOn = zustandStore((state) => state.setAuthOn);
+  const isAuthOn = zustandStore((state) => state.isAuthOn);
+  const setIsAuthOn = zustandStore((state) => state.setIsAuthOn);
+  const authType = zustandStore((state) => state.authType);
+  const setAuthType = zustandStore((state) => state.setAuthType);
+  const spin = zustandStore((state) => state.spin);
+  const setSpin = zustandStore((state) => state.setSpin);
+
+  useEffect(() => {
+    console.log(
+      "Hold Up! This is for developers only, so be careful while using this console."
+    );
+  });
+  const checkAuth = async () => {
+    try {
+      await axios
+        .get("/api/server", {
+          withCredentials: true,
+        })
+        .then((res) => {
+          setIsAuthOn(true);
+        });
+    } catch (error) {
+      setIsAuthOn(false);
+    }
+  };
+
+  checkAuth();
+  //zustand
 
   const navigate = useNavigate();
 
   const handleLogOut = () => {
-    setAuthOn(!authOn);
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    setSpin(true);
+    navigate("/");
+    setSpin(false);
   };
   const takeTo = (page: string) => {
     const props = {
@@ -46,7 +78,7 @@ const Sidebar = () => {
             </h2>
 
             <li
-              onClick={() => takeTo("profile")}
+              onClick={() => (isAuthOn ? takeTo("profile") : setAuthOn(true))}
               style={{ cursor: "pointer" }}
               className="text-lg font-bold-10000 flex flex-row items-center gap-1"
             >
@@ -62,7 +94,7 @@ const Sidebar = () => {
               <div className="hidden font-bold lg:block">Challenge</div>
             </li>
             <li
-              onClick={() => takeTo("followers")}
+              onClick={() => (isAuthOn ? takeTo("followers") : setAuthOn(true))}
               style={{ cursor: "pointer" }}
               className="text-lg font-bold-10000 flex flex-row items-center gap-1"
             >
@@ -70,7 +102,7 @@ const Sidebar = () => {
               <div className="hidden font-bold lg:block">Followers</div>
             </li>
             <li
-              onClick={() => takeTo("following")}
+              onClick={() => (isAuthOn ? takeTo("following") : setAuthOn(true))}
               style={{ cursor: "pointer" }}
               className="text-lg font-bold-10000 flex flex-row items-center gap-1"
             >
@@ -78,21 +110,23 @@ const Sidebar = () => {
               <div className="hidden font-bold lg:block">Following</div>
             </li>
             <li
-              onClick={() => takeTo("settings")}
+              onClick={() => (isAuthOn ? takeTo("settings") : setAuthOn(true))}
               style={{ cursor: "pointer" }}
               className="text-lg font-bold-10000 flex flex-row items-center gap-1"
             >
               <FiSettings size={30} />
               <div className="hidden font-bold lg:block">Settings</div>
             </li>
-            <li
-              onClick={handleLogOut}
-              style={{ cursor: "pointer" }}
-              className="text-lg font-bold-10000 flex flex-row items-center gap-1"
-            >
-              <AiOutlineArrowLeft size={30} />
-              <div className="hidden font-bold lg:block">Log Out</div>
-            </li>
+            {isAuthOn && (
+              <li
+                onClick={handleLogOut}
+                style={{ cursor: "pointer" }}
+                className="text-lg font-bold-10000 flex flex-row items-center gap-1"
+              >
+                <AiOutlineArrowLeft size={30} />
+                <div className="hidden font-bold lg:block">Log Out</div>
+              </li>
+            )}
           </ul>
         </div>
 
@@ -130,7 +164,7 @@ const Sidebar = () => {
           </li>
         </ul>
       </>
-      {authOn && <Popup open={true} type="signin" />}
+      {authOn && <Popup open={true} />}
     </>
   );
 };

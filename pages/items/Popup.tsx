@@ -12,15 +12,18 @@ import Image from "next/image";
 
 interface PopupInterface {
   open?: boolean;
-  type: string;
 }
-const Popup: React.FC<PopupInterface> = ({ open, type }) => {
+const Popup: React.FC<PopupInterface> = ({ open }) => {
   //zustand
 
   const authOn = zustandStore((state) => state.authOn);
   const setAuthOn = zustandStore((state) => state.setAuthOn);
-
-  const [types, setTypes] = useState(type);
+  const isAuthOn = zustandStore((state) => state.isAuthOn);
+  const setIsAuthOn = zustandStore((state) => state.setIsAuthOn);
+  const authType = zustandStore((state) => state.authType);
+  const setAuthType = zustandStore((state) => state.setAuthType);
+  const spin = zustandStore((state) => state.spin);
+  const setSpin = zustandStore((state) => state.setSpin);
 
   //inputs
 
@@ -28,8 +31,6 @@ const Popup: React.FC<PopupInterface> = ({ open, type }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleSignin = async () => {
     if (
@@ -39,9 +40,9 @@ const Popup: React.FC<PopupInterface> = ({ open, type }) => {
       password == ""
     ) {
       toast.error("Invalid Inputs");
-      setIsLoading(false);
+      setSpin(false);
     } else {
-      setIsLoading(true);
+      setSpin(true);
 
       try {
         await axios
@@ -49,14 +50,21 @@ const Popup: React.FC<PopupInterface> = ({ open, type }) => {
             username: username,
             password: password,
           })
-          .then((res) => console.log(res.data));
+          .then(
+            (res) =>
+              (document.cookie = `token=${JSON.stringify(
+                res.data
+              )}; expires=${new Date(
+                Date.now() + 1 * 60 * 60 * 1000
+              ).toUTCString()}; path=/`)
+          );
 
         setAuthOn(!authOn);
-        setIsLoading(false);
+        setSpin(false);
         toast.success("All Signed In");
       } catch (err) {
         toast.error("Wrong username or password");
-        setIsLoading(false);
+        setSpin(false);
       }
     }
   };
@@ -73,9 +81,9 @@ const Popup: React.FC<PopupInterface> = ({ open, type }) => {
       name == ""
     ) {
       toast.error("Invalid Inputs");
-      setIsLoading(false);
+      setSpin(false);
     } else {
-      setIsLoading(true);
+      setSpin(true);
       try {
         await axios.post("/api/signup", {
           name: name,
@@ -84,11 +92,11 @@ const Popup: React.FC<PopupInterface> = ({ open, type }) => {
           password: password,
         });
 
-        setAuthOn(!authOn);
-        setIsLoading(false);
+        setAuthType("signin");
+        setSpin(false);
         toast.success("All Signed Up");
       } catch (err) {
-        setIsLoading(false);
+        setSpin(false);
         toast.error("User Exists. If something is wrong, please contact us.");
       }
     }
@@ -98,7 +106,7 @@ const Popup: React.FC<PopupInterface> = ({ open, type }) => {
     <>
       {authOn == true && (
         <>
-          {types == "signin" ? (
+          {authType == "signin" ? (
             <>
               <div
                 className="absolute top-0 flex w-full h-full items-center justify-center"
@@ -137,7 +145,7 @@ const Popup: React.FC<PopupInterface> = ({ open, type }) => {
                     />
                     <div
                       style={{ cursor: "pointer" }}
-                      onClick={() => setTypes("signup")}
+                      onClick={() => setAuthType("signup")}
                     >
                       No Account? Sign Up
                     </div>
@@ -204,7 +212,7 @@ const Popup: React.FC<PopupInterface> = ({ open, type }) => {
                     />
                     <div
                       style={{ cursor: "pointer" }}
-                      onClick={() => setTypes("signin")}
+                      onClick={() => setAuthType("signin")}
                     >
                       Have an Account? Sign In
                     </div>
@@ -223,7 +231,6 @@ const Popup: React.FC<PopupInterface> = ({ open, type }) => {
           )}
         </>
       )}
-      <Spinner isLoading={isLoading} />
     </>
   );
 };
