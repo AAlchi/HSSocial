@@ -3,7 +3,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import prisma from "@/dbConfigure/prisma";
 
 interface DecodedToken extends JwtPayload {
-  userId: string; // Assuming userId is a string; adjust the type if it's different
+  userId: string;
 }
 
 export default async function handler(
