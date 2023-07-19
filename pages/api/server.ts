@@ -1,6 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 import prisma from "@/dbConfigure/prisma";
+
+interface DecodedToken extends JwtPayload {
+  userId: string; // Assuming userId is a string; adjust the type if it's different
+}
 
 export default async function handler(
   req: NextApiRequest,
@@ -18,7 +22,10 @@ export default async function handler(
       }
 
       try {
-        const decodedToken = jwt.verify(token, "traypizza");
+        const decodedToken: DecodedToken = jwt.verify(
+          token,
+          "traypizza"
+        ) as DecodedToken;
 
         const userId = decodedToken.userId;
 
