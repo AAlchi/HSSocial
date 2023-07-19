@@ -14,7 +14,7 @@ const Spinner = (props: any) => {
             color="red"
             loading={isLoading}
             size={90}
-            aria-label="Workin' on it"
+            aria-label="Working on it"
           />
         </div>
       ) : (

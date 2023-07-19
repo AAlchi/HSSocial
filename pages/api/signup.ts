@@ -10,19 +10,29 @@ export default async function handler(
     return res.status(500).end();
   }
 
+  const username = req.body.username;
+
   const password = req.body.password;
   try {
-    const add = await prisma.user.create({
-      data: {
-        name: req.body.name,
-        username: req.body.username,
-        email: req.body.email,
-        password: bcrypt.hashSync(password, 15),
-        profilePic: "",
-        bannerPic: "",
-      },
+    const fetchedUser = await prisma.user.findUnique({
+      where: { username },
     });
-    res.status(200).json(add);
+
+    if (fetchedUser) {
+      res.status(404).end();
+    } else {
+      const add = await prisma.user.create({
+        data: {
+          name: req.body.name,
+          username: req.body.username,
+          email: req.body.email,
+          password: bcrypt.hashSync(password, 15),
+          profilePic: "",
+          bannerPic: "",
+        },
+      });
+      res.status(200).json(add);
+    }
   } catch (err) {
     res.status(404).end();
   }

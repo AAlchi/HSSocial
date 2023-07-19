@@ -1,6 +1,7 @@
 "use client";
 import CreateProfile from "../items/CreateProfile";
 import Posts from "../items/Posts";
+import Settings from "../items/Settings";
 
 const SettingsPage = () => {
   return (
@@ -10,7 +11,7 @@ const SettingsPage = () => {
     >
       <CreateProfile />
       <h2 className="text-2xl text-center">Settings</h2>
-      <Posts />
+      <Settings />
     </div>
   );
 };

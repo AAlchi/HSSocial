@@ -21,7 +21,7 @@ const Error = () => {
         className="flex flex-col bg-slate-200 gap-10 p-10"
       >
         <h1 className="text-2xl">
-          You've come across a page we haven't been to yet, congrats!
+          You have come across a page we have not been to yet, congrats!
         </h1>
         <div className="flex">
           <Button first onClick={() => navigate("/")} placeholder="Go Back" />

@@ -4,7 +4,7 @@ import { CgProfile } from "react-icons/cg";
 import { BsCameraVideo } from "react-icons/bs";
 import { GiShadowFollower } from "react-icons/gi";
 import { MdFollowTheSigns } from "react-icons/md";
-import { AiOutlineArrowLeft } from "react-icons/ai";
+import { AiOutlineArrowLeft, AiOutlineTrophy } from "react-icons/ai";
 import { FiSettings } from "react-icons/fi";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -58,7 +58,7 @@ const Sidebar = () => {
               style={{ cursor: "pointer" }}
               className="text-lg font-bold-10000 flex flex-row items-center gap-1"
             >
-              <BsCameraVideo size={30} />
+              <AiOutlineTrophy size={30} />
               <div className="hidden font-bold lg:block">Challenge</div>
             </li>
             <li
@@ -119,7 +119,7 @@ const Sidebar = () => {
             style={{ cursor: "pointer" }}
             className="text-lg font-bold-10000 flex flex-row items-center gap-1"
           >
-            <BsCameraVideo size={30} />
+            <AiOutlineTrophy size={30} />
           </li>
           <li
             onClick={() => takeTo("settings")}
@@ -130,7 +130,7 @@ const Sidebar = () => {
           </li>
         </ul>
       </>
-      {authOn && <Popup open={true} type="signup" />}
+      {authOn && <Popup open={true} type="signin" />}
     </>
   );
 };
