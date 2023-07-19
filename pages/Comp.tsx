@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import Profile from "./components/pages/Profile";
 import Settings from "./components/pages/Settings";
 import Challenge from "./components/pages/Challenge";
+import Spinner from "./items/Spinner";
 
 const Comp = () => {
   return (
@@ -20,6 +21,7 @@ const Comp = () => {
         <Route path="/settings" element={<Settings />} />
         <Route path="*" element={<Error />} />
       </Routes>
+      <Spinner isLoading={true} />
     </Router>
   );
 };

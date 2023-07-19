@@ -9,6 +9,7 @@ export default async function handler(
 ) {
   if (req.method != "POST") {
     res.status(500).end();
+    return;
   } else {
     try {
       const username = req.body.username;
@@ -28,9 +29,9 @@ export default async function handler(
           const generateToken = jwt.sign(
             { userId: fetchedUser.id },
             "traypizza",
-            { expiresIn: "2h" }
+            { expiresIn: "1h" }
           );
-          res.status(200).json({ generateToken });
+          res.status(200).json(generateToken);
         } else {
           res.status(404).end();
         }
