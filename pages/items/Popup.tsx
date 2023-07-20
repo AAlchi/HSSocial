@@ -51,12 +51,12 @@ const Popup: React.FC<PopupInterface> = ({ open }) => {
             password: password,
           })
           .then(
-            (res) => console.log(res.data)
-            // (document.cookie = `token=${JSON.stringify(
-            //   res.data
-            // )}; expires=${new Date(
-            //   Date.now() + 1 * 60 * 60 * 1000
-            // ).toUTCString()}; path=/`)
+            (res) =>
+              (document.cookie = `token=${JSON.stringify(
+                res.data
+              )}; expires=${new Date(
+                Date.now() + 1 * 60 * 60 * 1000
+              ).toUTCString()}; path=/`)
           );
 
         setAuthOn(!authOn);
