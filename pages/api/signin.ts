@@ -11,36 +11,37 @@ export default async function handler(
     res.status(500).end();
     return;
   } else {
-    // try {
-    //   const username = req.body.username;
-    //   const password = req.body.password;
+    try {
+      res.status(200).send("Hi");
 
-    //   const fetchedUser = await prisma.user.findUnique({
-    //     where: { username },
-    //   });
+      //   const username = req.body.username;
+      //   const password = req.body.password;
 
-    //   if (fetchedUser) {
-    //     const passwordCompare = await bcrypt.compareSync(
-    //       password,
-    //       fetchedUser.password
-    //     );
+      //   const fetchedUser = await prisma.user.findUnique({
+      //     where: { username },
+      //   });
 
-    //     if (passwordCompare) {
-    //       const generateToken = jwt.sign(
-    //         { userId: fetchedUser.id },
-    //         "traypizza",
-    //         { expiresIn: "1h" }
-    //       );
-    //       res.status(200).json(generateToken);
-    //     } else {
-    //       res.status(404).end();
-    //     }
-    //   } else {
-    //     res.status(404).end();
-    //   }
-    // } catch (err) {
-    //   res.status(404).end();
-    // }
-    res.status(200).send("Hi");
+      //   if (fetchedUser) {
+      //     const passwordCompare = await bcrypt.compareSync(
+      //       password,
+      //       fetchedUser.password
+      //     );
+
+      //     if (passwordCompare) {
+      //       const generateToken = jwt.sign(
+      //         { userId: fetchedUser.id },
+      //         "traypizza",
+      //         { expiresIn: "1h" }
+      //       );
+      //       res.status(200).json(generateToken);
+      //     } else {
+      //       res.status(404).end();
+      //     }
+      //   } else {
+      //     res.status(404).end();
+      //   }
+    } catch (err) {
+      res.status(404).end();
+    }
   }
 }
