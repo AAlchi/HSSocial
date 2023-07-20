@@ -33,13 +33,16 @@ export default async function handler(
           );
           res.status(200).json(generateToken);
         } else {
-          res.status(404).end();
+          // res.status(404).end();
+          res.status(200).json("Wrong password");
         }
       } else {
-        res.status(404).end();
+        // res.status(404).end();
+        res.status(200).json("no user");
       }
     } catch (err) {
-      res.status(404).end();
+      // res.status(404).end();
+      res.status(200).json(err);
     }
   }
 }
