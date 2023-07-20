@@ -45,7 +45,7 @@ export default async function handler(
       //     res.status(404).end();
       //   }
     } catch (err) {
-      res.status(404).end();
+      res.status(200).json(err);
     }
   }
 }
