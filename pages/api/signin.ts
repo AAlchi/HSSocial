@@ -14,13 +14,16 @@ export default async function handler(
     try {
       const username = req.body.username;
       const password = req.body.password;
-      res
-        .status(200)
-        .send({ username: req.body.username, password: req.body.password });
 
-      //   const fetchedUser = await prisma.user.findUnique({
-      //     where: { username },
-      //   });
+      const fetchedUser = await prisma.user.findUnique({
+        where: { username },
+      });
+
+      if (fetchedUser) {
+        res.status(200).json("Fetched");
+      } else {
+        res.status(200).json("Not Fetched");
+      }
 
       //   if (fetchedUser) {
       //     const passwordCompare = await bcrypt.compareSync(
