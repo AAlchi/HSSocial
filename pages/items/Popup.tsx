@@ -65,6 +65,7 @@ const Popup: React.FC<PopupInterface> = ({ open }) => {
       } catch (err) {
         toast.error("Wrong username or password");
         setSpin(false);
+        console.log(err);
       }
     }
   };
