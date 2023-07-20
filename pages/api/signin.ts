@@ -12,10 +12,11 @@ export default async function handler(
     return;
   } else {
     try {
-      res.status(200).send("Hi");
-
-      //   const username = req.body.username;
-      //   const password = req.body.password;
+      const username = req.body.username;
+      const password = req.body.password;
+      res
+        .status(200)
+        .send({ username: req.body.username, password: req.body.password });
 
       //   const fetchedUser = await prisma.user.findUnique({
       //     where: { username },
