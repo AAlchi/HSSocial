@@ -19,11 +19,7 @@ export default async function handler(
         where: { username },
       });
 
-      if (fetchedUser) {
-        res.status(200).json("Fetched");
-      } else {
-        res.status(200).json("Not Fetched");
-      }
+      console.log(fetchedUser);
 
       //   if (fetchedUser) {
       //     const passwordCompare = await bcrypt.compareSync(
