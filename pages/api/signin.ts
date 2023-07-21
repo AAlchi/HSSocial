@@ -19,27 +19,25 @@ export default async function handler(
         where: { username },
       });
 
-      console.log(fetchedUser);
+      if (fetchedUser) {
+        const passwordCompare = await bcrypt.compareSync(
+          password,
+          fetchedUser.password
+        );
 
-      //   if (fetchedUser) {
-      //     const passwordCompare = await bcrypt.compareSync(
-      //       password,
-      //       fetchedUser.password
-      //     );
-
-      //     if (passwordCompare) {
-      //       const generateToken = jwt.sign(
-      //         { userId: fetchedUser.id },
-      //         "traypizza",
-      //         { expiresIn: "1h" }
-      //       );
-      //       res.status(200).json(generateToken);
-      //     } else {
-      //       res.status(404).end();
-      //     }
-      //   } else {
-      //     res.status(404).end();
-      //   }
+        if (passwordCompare) {
+          const generateToken = jwt.sign(
+            { userId: fetchedUser.id },
+            "traypizza",
+            { expiresIn: "1h" }
+          );
+          res.status(200).json(generateToken);
+        } else {
+          res.status(404).end();
+        }
+      } else {
+        res.status(404).end();
+      }
     } catch (err) {
       res.status(200).json(err);
     }
