@@ -34,8 +34,23 @@ export default async function handler(
           where: { id: userId },
         });
 
+        const data = {
+          userId: decodedToken.id,
+          username: decodedToken.username,
+          email: decodedToken.email,
+          name: decodedToken.name,
+          publicOrPrivate: decodedToken.publicOrPrivate,
+          bornOn: decodedToken.bornOn,
+          followers: decodedToken.followers,
+          following: decodedToken.following,
+          profilePicture: decodedToken.profilePicture,
+          bannerPicture: decodedToken.bannerPicture,
+          dateCreated: decodedToken.dateCreated,
+          dateUpdated: decodedToken.dateUpdated,
+        };
+
         if (fetchedUser) {
-          res.status(200).json({ message: "User is authenticated." });
+          res.status(200).json(data);
         } else {
           res.status(401).end();
         }

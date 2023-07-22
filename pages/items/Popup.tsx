@@ -24,6 +24,18 @@ const Popup: React.FC<PopupInterface> = ({ open }) => {
   const setAuthType = zustandStore((state) => state.setAuthType);
   const spin = zustandStore((state) => state.spin);
   const setSpin = zustandStore((state) => state.setSpin);
+  const names = zustandStore((state) => state.names);
+  const setNames = zustandStore((state) => state.setNames);
+  const usernames = zustandStore((state) => state.usernames);
+  const setUsernames = zustandStore((state) => state.setUsernames);
+  const emails = zustandStore((state) => state.emails);
+  const setEmails = zustandStore((state) => state.setEmails);
+  const mongoID = zustandStore((state) => state.mongoID);
+  const setMongoID = zustandStore((state) => state.setMongoID);
+  const profilePicture = zustandStore((state) => state.profilePicture);
+  const setProfilePicture = zustandStore((state) => state.setProfilePicture);
+  const bannerPicture = zustandStore((state) => state.bannerPicture);
+  const setBannerPicture = zustandStore((state) => state.setBannerPicture);
 
   //inputs
 
@@ -65,7 +77,6 @@ const Popup: React.FC<PopupInterface> = ({ open }) => {
       } catch (err) {
         toast.error("Wrong username or password");
         setSpin(false);
-        console.log(err);
       }
     }
   };

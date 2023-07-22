@@ -27,8 +27,21 @@ export default async function handler(
 
         if (passwordCompare) {
           const generateToken = jwt.sign(
-            { userId: fetchedUser.id },
-            "traypizza",
+            {
+              userId: fetchedUser.id,
+              username: fetchedUser.username,
+              email: fetchedUser.email,
+              name: fetchedUser.name,
+              publicOrPrivate: fetchedUser.publicOrPrivate,
+              bornOn: fetchedUser.bornOn,
+              followers: fetchedUser.followers,
+              following: fetchedUser.following,
+              profilePicture: fetchedUser.profilePicture,
+              bannerPicture: fetchedUser.bannerPicture,
+              dateCreated: fetchedUser.dateCreated,
+              dateUpdated: fetchedUser.dateUpdated,
+            },
+            process.env.JSON_SECRET as string,
             { expiresIn: "1h" }
           );
           res.status(200).json(generateToken);

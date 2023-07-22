@@ -23,6 +23,30 @@ const Sidebar = () => {
   const setAuthType = zustandStore((state) => state.setAuthType);
   const spin = zustandStore((state) => state.spin);
   const setSpin = zustandStore((state) => state.setSpin);
+  const names = zustandStore((state) => state.names);
+  const setNames = zustandStore((state) => state.setNames);
+  const usernames = zustandStore((state) => state.usernames);
+  const setUsernames = zustandStore((state) => state.setUsernames);
+  const emails = zustandStore((state) => state.emails);
+  const setEmails = zustandStore((state) => state.setEmails);
+  const mongoID = zustandStore((state) => state.mongoID);
+  const setMongoID = zustandStore((state) => state.setMongoID);
+  const profilePicture = zustandStore((state) => state.profilePicture);
+  const setProfilePicture = zustandStore((state) => state.setProfilePicture);
+  const bannerPicture = zustandStore((state) => state.bannerPicture);
+  const setBannerPicture = zustandStore((state) => state.setBannerPicture);
+  const publicOrPrivate = zustandStore((state) => state.publicOrPrivate);
+  const setPublicOrPrivate = zustandStore((state) => state.setPublicOrPrivate);
+  const followers = zustandStore((state) => state.followers);
+  const setFollowers = zustandStore((state) => state.setFollowers);
+  const following = zustandStore((state) => state.following);
+  const setFollowing = zustandStore((state) => state.setFollowing);
+  const dateCreated = zustandStore((state) => state.dateCreated);
+  const setDateCreated = zustandStore((state) => state.setDateCreated);
+  const dateUpdated = zustandStore((state) => state.dateUpdated);
+  const setDateUpdated = zustandStore((state) => state.setDateUpdated);
+  const bornOn = zustandStore((state) => state.bornOn);
+  const setBornOn = zustandStore((state) => state.setBornOn);
 
   useEffect(() => {
     console.log(
@@ -37,6 +61,18 @@ const Sidebar = () => {
         })
         .then((res) => {
           setIsAuthOn(true);
+          setNames(res.data.name);
+          setEmails(res.data.email);
+          setUsernames(res.data.username);
+          setMongoID(res.data.mongoID);
+          setProfilePicture(res.data.profilePicture);
+          setBannerPicture(res.data.bannerPicture);
+          setBornOn(res.data.bornOn);
+          setPublicOrPrivate(res.data.publicOrPrivate);
+          setDateCreated(res.data.dateCreated);
+          setDateUpdated(res.data.dateUpdated);
+          setFollowers(res.data.followers);
+          setFollowing(res.data.following);
         });
     } catch (error) {
       setIsAuthOn(false);
