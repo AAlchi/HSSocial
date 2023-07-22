@@ -4,7 +4,7 @@ import Button from "./Button";
 import Images from "./Images";
 import zustandStore from "@/store/zustandStore";
 
-const CreateProfile = () => {
+const CreateSettings = () => {
   const authOn = zustandStore((state) => state.authOn);
   const setAuthOn = zustandStore((state) => state.setAuthOn);
   const isAuthOn = zustandStore((state) => state.isAuthOn);
@@ -67,12 +67,11 @@ const CreateProfile = () => {
           />
         </div>
         <div className="flex items-center">
-          <Button onClick={() => {}} placeholder="Follow" first />
-          {/* <Button onClick={() => {}} placeholder="Edit" second /> */}
+          <Button onClick={() => {}} placeholder="Edit" first />
         </div>
       </div>
     </div>
   );
 };
 
-export default CreateProfile;
+export default CreateSettings;

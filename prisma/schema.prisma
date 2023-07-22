@@ -19,6 +19,10 @@ model User {
   password String
   profilePicture String
   bannerPicture String
+  publicOrPrivate String
+  bornOn String
+  followers String
+  following String
   dateCreated DateTime @default(now())
   dateUpdated DateTime @updatedAt
 }
