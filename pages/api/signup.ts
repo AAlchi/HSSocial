@@ -27,8 +27,8 @@ export default async function handler(
           username: req.body.username,
           email: req.body.email,
           password: bcrypt.hashSync(password, 15),
-          profilePic: "",
-          bannerPic: "",
+          profilePicture: "",
+          bannerPicture: "",
         },
       });
       res.status(200).json(add);
