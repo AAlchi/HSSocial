@@ -36,6 +36,4 @@ export default async function handler(
   } catch (err) {
     res.status(404).end();
   }
-
-  return res.status(200).json("All Signed Up");
 }
