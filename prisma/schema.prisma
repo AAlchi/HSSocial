@@ -17,8 +17,8 @@ model User {
   email String @unique
   username String @unique
   password String
-  profilePic String
-  bannerPic String
+  profilePicture String
+  bannerPicture String
   dateCreated DateTime @default(now())
   dateUpdated DateTime @updatedAt
 }

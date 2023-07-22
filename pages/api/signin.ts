@@ -31,7 +31,7 @@ export default async function handler(
             "traypizza",
             { expiresIn: "1h" }
           );
-          res.status(200).json(generateToken);
+          res.status(200).json({ generateToken });
         } else {
           res.status(404).end();
         }
@@ -39,7 +39,7 @@ export default async function handler(
         res.status(404).end();
       }
     } catch (err) {
-      res.status(200).json(err);
+      res.status(500).end();
     }
   }
 }
