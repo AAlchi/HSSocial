@@ -31,7 +31,7 @@ export default async function handler(
             "traypizza",
             { expiresIn: "1h" }
           );
-          res.status(200).json({ generateToken });
+          res.status(200).json(generateToken);
         } else {
           res.status(404).end();
         }
