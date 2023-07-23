@@ -3,6 +3,8 @@ import Input from "./Input";
 import Button from "./Button";
 import Images from "./Images";
 import zustandStore from "@/store/zustandStore";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const CreateProfile = () => {
   const authOn = zustandStore((state) => state.authOn);
@@ -40,6 +42,54 @@ const CreateProfile = () => {
 
   const [post, setPost] = useState("");
 
+  const url = window.location.href;
+  const getUser = url.split("/");
+
+  const finalUser = getUser[getUser.length - 1];
+
+  const [theUsername, setTheUsername] = useState("");
+  const [theAccountStatus, setTheAccountStatus] = useState("");
+  const [theBornOn, setTheBornOn] = useState("");
+  const [theFollowers, setTheFollowers] = useState("");
+  const [theFollowing, setTheFollowing] = useState("");
+  const [thePosts, setThePosts] = useState("");
+  const [theDateCreated, setTheDateCreated] = useState("");
+  const [theDateUpdated, setTheDateUpdated] = useState("");
+  const [theProfilePicture, setTheProfilePicture] = useState("");
+  const [theBannerPicture, setTheBannerPicture] = useState("");
+
+  const getUserData = async () => {
+    try {
+      await axios
+        .post("/api/getUserData", {
+          username: finalUser,
+        })
+        .then((res) => {
+          console.log(res.data);
+          setTheUsername(res.data.username);
+          setTheAccountStatus(res.data.publicOrPrivate);
+          setTheBornOn(res.data.bornOn);
+          setTheFollowers(res.data.followers);
+          setTheFollowing(res.data.following);
+          setTheDateCreated(res.data.dateCreated);
+          setTheDateUpdated(res.data.dateUpdated);
+        });
+    } catch (err) {
+      toast.error("There was an error fetching user data");
+
+      setTheUsername("Could Not Fetch");
+      setTheAccountStatus("Could Not Fetch");
+      setTheBornOn("Could Not Fetch");
+      setTheFollowers("Could Not Fetch");
+      setTheFollowing("Could Not Fetch");
+
+      setTheDateCreated("Could Not Fetch");
+      setTheDateUpdated("Could Not Fetch");
+    }
+  };
+
+  getUserData();
+
   return (
     <div
       style={{
@@ -59,7 +109,7 @@ const CreateProfile = () => {
         className="flex flex-row justify-evenly items-center flex-wrap bg-slate-200 gap-10 p-7"
       >
         <div className="flex flex-col gap-5">
-          <h1 className="text-2xl text-white font-bold">{usernames}</h1>
+          <h1 className="text-2xl text-white font-bold">{theUsername}</h1>
           <Images
             type="largeProfile"
             imageName="profilePic"
@@ -67,8 +117,11 @@ const CreateProfile = () => {
           />
         </div>
         <div className="flex items-center">
-          <Button onClick={() => {}} placeholder="Follow" first />
-          {/* <Button onClick={() => {}} placeholder="Edit" second /> */}
+          {finalUser === usernames ? (
+            <Button onClick={() => {}} placeholder="Edit" second />
+          ) : (
+            <Button onClick={() => {}} placeholder="Follow" first />
+          )}
         </div>
       </div>
     </div>

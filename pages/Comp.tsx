@@ -16,7 +16,7 @@ const Comp = () => {
       <link rel="icon" href="./logo.png" />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/:person" element={<Profile />} />
         <Route path="/challenge" element={<Challenge />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="*" element={<Error />} />

@@ -1,7 +1,12 @@
+"use client";
+import { useEffect } from "react";
 import Sidebar from "../Sidebar";
 import SettingsPage from "../SettingsPage";
 
 const Settings = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   return (
     <div className="flex justify-center">
       <div

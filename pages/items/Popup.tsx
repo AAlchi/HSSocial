@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Input from "./Input";
 import Button from "./Button";
 import { Link } from "react-router-dom";
@@ -14,6 +14,9 @@ interface PopupInterface {
   open?: boolean;
 }
 const Popup: React.FC<PopupInterface> = ({ open }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   //zustand
 
   const authOn = zustandStore((state) => state.authOn);
@@ -118,7 +121,7 @@ const Popup: React.FC<PopupInterface> = ({ open }) => {
     <>
       {authOn == true && (
         <>
-          {authType == "signin" ? (
+          {authType == "signin" && (
             <>
               <div
                 className="absolute top-0 flex w-full h-full items-center justify-center"
@@ -173,7 +176,9 @@ const Popup: React.FC<PopupInterface> = ({ open }) => {
                 </div>
               </div>
             </>
-          ) : (
+          )}
+
+          {authType === "signup" && (
             <>
               <div
                 style={{ zIndex: "999" }}
@@ -233,6 +238,53 @@ const Popup: React.FC<PopupInterface> = ({ open }) => {
                     src="/tech.jpg"
                     height={window.innerHeight}
                     width={window.innerWidth / 2}
+                    className="hidden sm:block"
+                    style={{ objectFit: "cover", width: "50%" }}
+                    alt="image"
+                  />
+                </div>
+              </div>
+            </>
+          )}
+
+          {authType === "update" && (
+            <>
+              <div
+                className="absolute top-0 flex w-full h-full items-center justify-center"
+                style={{ zIndex: "999" }}
+              >
+                <div className="text-white absolute bg-black w-full h-full flex flex-row gap-5">
+                  <div
+                    style={{ borderRadius: "10px" }}
+                    className="flex flex-col gap-6 w-full p-5"
+                  >
+                    <div className="flex justify-between">
+                      <h2 className="text-3xl font-bold-500">Update Account</h2>
+                      <div
+                        style={{ cursor: "pointer" }}
+                        onClick={() => setAuthOn(!authOn)}
+                      >
+                        Close{" "}
+                      </div>
+                    </div>
+                    <Input
+                      type="text"
+                      onChange={(e) => setUsername(e.target.value)}
+                      placeholder="Username"
+                      value={username}
+                    />
+                    <Input
+                      type="password"
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Password"
+                      value={password}
+                    />
+                    <Button onClick={handleSignin} placeholder="Update" first />
+                  </div>
+                  <Image
+                    src="/tech.jpg"
+                    width={window.innerWidth / 2}
+                    height={window.innerHeight}
                     className="hidden sm:block"
                     style={{ objectFit: "cover", width: "50%" }}
                     alt="image"

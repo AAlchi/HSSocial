@@ -1,3 +1,5 @@
+"use client";
+import { useEffect } from "react";
 import Sidebar from "../Sidebar";
 import ProfilePage from "../ProfilePage";
 import Popup from "../../items/Popup";

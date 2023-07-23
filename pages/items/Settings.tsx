@@ -45,6 +45,24 @@ const Posts = () => {
 
   const [post, setPost] = useState("");
 
+  const dateCreatedFormat: string = dateCreated;
+  const dateCreatedFormatTwo: Date = new Date(dateCreatedFormat);
+
+  const dateUpdatedFormat: string = dateUpdated;
+  const dateUpdatedFormatTwo: Date = new Date(dateUpdatedFormat);
+
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  };
+  const dateCreatedFormatThree: string =
+    dateCreatedFormatTwo.toLocaleDateString("en-US", options);
+
+  const dateUpdatedFormatThree: string =
+    dateUpdatedFormatTwo.toLocaleDateString("en-US", options);
+
   const navigate = useNavigate();
 
   const handleLogOut = () => {
@@ -62,7 +80,14 @@ const Posts = () => {
       >
         <div className="flex items-center justify-between gap-2 flex-wrap">
           <h1 className="text-lg">@{usernames}</h1>
-          <Button second onClick={() => {}} placeholder="Edit" />
+          <Button
+            second
+            onClick={() => {
+              setAuthOn(true);
+              setAuthType("update");
+            }}
+            placeholder="Edit"
+          />
         </div>
         <div>
           <ul>
@@ -74,6 +99,12 @@ const Posts = () => {
           <ul>
             <li>Followers - {followers}</li>
             <li>Following - {following}</li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li>Created At - {dateCreatedFormatThree}</li>
+            <li>Updated At - {dateUpdatedFormatThree}</li>
           </ul>
         </div>
         <div>
