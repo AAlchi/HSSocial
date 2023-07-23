@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Sidebar from "../Sidebar";
 import HomePage from "../HomePage";
 import Popup from "../../items/Popup";
@@ -9,6 +9,10 @@ import { useNavigate } from "react-router-dom";
 const Error = () => {
   const [post, setPost] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
 
   return (
     <div className="flex w-full h-full items-center justify-center">

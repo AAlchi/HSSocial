@@ -1,8 +1,13 @@
+"use client";
+import { useEffect } from "react";
 import Sidebar from "../Sidebar";
 import HomePage from "../HomePage";
 import Popup from "../../items/Popup";
 
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   return (
     <div className="flex justify-center">
       <div
