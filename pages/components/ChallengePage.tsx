@@ -19,7 +19,7 @@ const ChallengePage = () => {
       className="flex justify-center flex-col gap-10"
     >
       <Challenge />
-      <Placeholder />
+      <Placeholder placeholder="Talk to one of the Hack Club leaders to join the challenge" />
     </div>
   );
 };

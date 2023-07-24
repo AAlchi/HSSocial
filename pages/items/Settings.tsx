@@ -73,49 +73,104 @@ const Posts = () => {
   };
 
   return (
-    <>
-      <div
-        style={{ width: "100%", maxWidth: "600px" }}
-        className="flex flex-col bg-slate-200 gap-10 p-7"
-      >
-        <div className="flex items-center justify-between gap-2 flex-wrap">
-          <h1 className="text-lg">@{usernames}</h1>
-          <Button
-            second
-            onClick={() => {
-              setAuthOn(true);
-              setAuthType("update");
-            }}
-            placeholder="Edit"
-          />
-        </div>
-        <div>
-          <ul>
-            <li>Account - {publicOrPrivate}</li>
-            <li>Born on - {bornOn}</li>
-          </ul>
-        </div>
-        <div>
-          <ul>
-            <li>Followers - {followers}</li>
-            <li>Following - {following}</li>
-          </ul>
-        </div>
-        <div>
-          <ul>
-            <li>Created At - {dateCreatedFormatThree}</li>
-            <li>Updated At - {dateUpdatedFormatThree}</li>
-          </ul>
-        </div>
-        <div>
-          <Button onClick={handleLogOut} first placeholder="Log Out" />
-        </div>
-        <div className="flex gap-5">
-          <Button onClick={() => {}} placeholder="Password" second />
-          <Button onClick={() => {}} placeholder="Delete" second />
-        </div>
-      </div>
-    </>
+    <div
+      style={{ width: "100%", maxWidth: "600px" }}
+      className="flex flex-col bg-slate-200 gap-10 p-7"
+    >
+      {isAuthOn == true ? (
+        <>
+          <div
+            style={{ width: "100%", maxWidth: "600px" }}
+            className="flex flex-col bg-slate-200 gap-10 p-7"
+          >
+            <div className="flex items-center justify-between gap-2 flex-wrap">
+              <h1 className="text-lg">@{usernames}</h1>
+              <Button
+                second
+                onClick={() => {
+                  setAuthOn(true);
+                  setAuthType("update");
+                }}
+                placeholder="Edit"
+              />
+            </div>
+            <div>
+              <ul>
+                <li>Account - {publicOrPrivate}</li>
+                <li>Born on - {bornOn}</li>
+              </ul>
+            </div>
+            <div>
+              <ul>
+                <li>Followers - {followers}</li>
+                <li>Following - {following}</li>
+              </ul>
+            </div>
+            <div>
+              <ul>
+                <li>Created At - {dateCreatedFormatThree}</li>
+                <li>Updated At - {dateUpdatedFormatThree}</li>
+              </ul>
+            </div>
+            <div>
+              <Button onClick={handleLogOut} first placeholder="Log Out" />
+            </div>
+            <div className="flex gap-5">
+              <Button onClick={() => {}} placeholder="Password" second />
+              <Button onClick={() => {}} placeholder="Delete" second />
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div
+            style={{ width: "100%", maxWidth: "600px" }}
+            className="flex flex-col bg-slate-200 gap-10 p-7"
+          >
+            <div className="flex items-center justify-between gap-2 flex-wrap">
+              <h1 className="text-lg">To See Data Like:</h1>
+            </div>
+            <div>
+              <ul>
+                <li>- Account Status</li>
+                <li>- Birthday</li>
+              </ul>
+            </div>
+            <div>
+              <ul>
+                <li>- Followers count</li>
+                <li>- Following count</li>
+              </ul>
+            </div>
+            <div>
+              <ul>
+                <li>- Created At</li>
+                <li>- Updated At</li>
+              </ul>
+            </div>
+
+            <div className="flex gap-5">
+              <Button
+                onClick={() => {
+                  setAuthOn(true);
+                  setAuthType("signin");
+                }}
+                placeholder="Sign In"
+                second
+              />
+              <Button
+                onClick={() => {
+                  setAuthOn(true);
+                  setAuthType("signup");
+                }}
+                placeholder="Sign Up"
+                second
+              />
+            </div>
+          </div>
+        </>
+      )}
+    </div>
   );
 };
 
