@@ -114,7 +114,9 @@ const Sidebar = () => {
             </h2>
 
             <li
-              onClick={() => (isAuthOn ? takeTo("profile") : setAuthOn(true))}
+              onClick={() =>
+                isAuthOn ? takeTo(`profile/${usernames}`) : setAuthOn(true)
+              }
               style={{ cursor: "pointer" }}
               className="text-lg font-bold-10000 flex flex-row items-center gap-1"
             >
@@ -178,7 +180,7 @@ const Sidebar = () => {
             <BiHomeAlt size={30} />{" "}
           </li>
           <li
-            onClick={() => takeTo("profile")}
+            onClick={() => takeTo(`profile/${usernames}`)}
             style={{ cursor: "pointer" }}
             className="text-lg font-bold-10000 flex flex-row items-center gap-1"
           >

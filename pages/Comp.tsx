@@ -7,6 +7,8 @@ import Profile from "./components/pages/Profile";
 import Settings from "./components/pages/Settings";
 import Challenge from "./components/pages/Challenge";
 import Spinner from "./items/Spinner";
+import Following from "./components/pages/Following";
+import Followers from "./components/pages/Followers";
 
 const Comp = () => {
   return (
@@ -19,6 +21,8 @@ const Comp = () => {
         <Route path="/profile/:person" element={<Profile />} />
         <Route path="/challenge" element={<Challenge />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/following" element={<Following />} />
+        <Route path="/followers" element={<Followers />} />
         <Route path="*" element={<Error />} />
       </Routes>
       <Spinner isLoading={true} />
