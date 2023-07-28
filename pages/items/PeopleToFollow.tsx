@@ -3,6 +3,7 @@ import Input from "./Input";
 import Button from "./Button";
 import Images from "./Images";
 import zustandStore from "@/store/zustandStore";
+import axios from "axios";
 
 const PeopleToFollow = () => {
   //zustand
@@ -16,6 +17,11 @@ const PeopleToFollow = () => {
 
   const [post, setPost] = useState("");
 
+  const [peopleFollow, setPeopleFollow] = useState([]);
+
+  axios.get("/api/getPeopleToFollow").then((res) => setPeopleFollow(res.data));
+
+  console.log(peopleFollow);
   return (
     <>
       {isAuthOn && (
@@ -54,6 +60,9 @@ const PeopleToFollow = () => {
                 />
               </div>
             </>
+            {peopleFollow.map((people, index) => (
+              <div></div>
+            ))}
           </div>
         </div>
       )}

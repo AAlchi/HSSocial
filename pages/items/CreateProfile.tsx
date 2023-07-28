@@ -58,6 +58,21 @@ const CreateProfile = () => {
   const [theProfilePicture, setTheProfilePicture] = useState("");
   const [theBannerPicture, setTheBannerPicture] = useState("");
 
+  const followAction = async () => {
+    try {
+      axios
+        .post("/api/follow", {
+          userId: mongoID,
+          followUsername: theUsername,
+        })
+        .then((res) => {
+          toast.success("You are now following " + theUsername);
+        });
+    } catch (err) {
+      toast.error("Something went wrong, please try again later.");
+    }
+  };
+
   const getUserData = async () => {
     try {
       await axios
@@ -120,7 +135,7 @@ const CreateProfile = () => {
           {finalUser === usernames ? (
             <Button onClick={() => {}} placeholder="Edit" second />
           ) : (
-            <Button onClick={() => {}} placeholder="Follow" first />
+            <Button onClick={() => followAction} placeholder="Follow" first />
           )}
         </div>
       </div>
