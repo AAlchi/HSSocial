@@ -21,8 +21,8 @@ model User {
   bannerPicture String
   publicOrPrivate String
   bornOn String
-  followers String
-  following String
+  followers String[]
+  following String[]
   dateCreated DateTime @default(now())
   dateUpdated DateTime @updatedAt
 }
