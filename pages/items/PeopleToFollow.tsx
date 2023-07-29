@@ -60,9 +60,9 @@ const PeopleToFollow = () => {
                 />
               </div>
             </>
-            {peopleFollow.map((people, index) => (
+            {/* {peopleFollow.map((people, index) => (
               <div></div>
-            ))}
+            ))} */}
           </div>
         </div>
       )}
