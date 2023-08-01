@@ -64,6 +64,7 @@ const CreateSettings = () => {
             type="largeProfile"
             imageName="profilePic"
             imageUrl="/tech.jpg"
+            onClick={() => {}}
           />
         </div>
         <div className="flex items-center">

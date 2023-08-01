@@ -9,6 +9,7 @@ import Challenge from "./components/pages/Challenge";
 import Spinner from "./items/Spinner";
 import Following from "./components/pages/Following";
 import Followers from "./components/pages/Followers";
+import Comment from "./components/pages/Comment";
 
 const Comp = () => {
   return (
@@ -16,6 +17,7 @@ const Comp = () => {
       <Toaster />
       <title>HS Social</title>
       <link rel="icon" href="./logo.png" />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/profile/:person" element={<Profile />} />
@@ -24,6 +26,7 @@ const Comp = () => {
         <Route path="/following" element={<Following />} />
         <Route path="/followers" element={<Followers />} />
         <Route path="*" element={<Error />} />
+        <Route path="/comments/:id" element={<Comment />} />
       </Routes>
       <Spinner isLoading={true} />
     </Router>

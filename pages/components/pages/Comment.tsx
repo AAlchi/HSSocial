@@ -4,8 +4,9 @@ import Sidebar from "../Sidebar";
 import HomePage from "../HomePage";
 import Popup from "../../items/Popup";
 import Comments from "@/pages/items/CreateComments";
+import CommentPage from "../CommentsPage";
 
-const Home = () => {
+const Comment = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   });
@@ -16,10 +17,10 @@ const Home = () => {
         className="p-5 flex justify-evenly md:gap-10 lg:gap-10"
       >
         <Sidebar />
-        <HomePage />
+        <CommentPage />
       </div>
     </div>
   );
 };
 
-export default Home;
+export default Comment;
