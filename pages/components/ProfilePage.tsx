@@ -5,7 +5,7 @@ import CreateProfile from "../items/CreateProfile";
 import Posts from "../items/Posts";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ProfilePage = () => {
   const authOn = zustandStore((state) => state.authOn);
@@ -57,37 +57,39 @@ const ProfilePage = () => {
   const [theProfilePicture, setTheProfilePicture] = useState("");
   const [theBannerPicture, setTheBannerPicture] = useState("");
 
-  const getUserData = async () => {
-    try {
-      await axios
-        .post("/api/getUserData", {
-          username: finalUser,
-        })
-        .then((res) => {
-          console.log(res.data);
-          setTheUsername(res.data.username);
-          setTheAccountStatus(res.data.publicOrPrivate);
-          setTheBornOn(res.data.bornOn);
-          setTheFollowers(res.data.followers);
-          setTheFollowing(res.data.following);
-          setTheDateCreated(res.data.dateCreated);
-          setTheDateUpdated(res.data.dateUpdated);
-        });
-    } catch (err) {
-      toast.error("There was an error fetching user data");
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        await axios
+          .post("/api/getUserData", {
+            username: finalUser,
+          })
+          .then((res) => {
+            console.log(res.data);
+            setTheUsername(res.data.username);
+            setTheAccountStatus(res.data.publicOrPrivate);
+            setTheBornOn(res.data.bornOn);
+            setTheFollowers(res.data.followers);
+            setTheFollowing(res.data.following);
+            setTheDateCreated(res.data.dateCreated);
+            setTheDateUpdated(res.data.dateUpdated);
+          });
+      } catch (err) {
+        toast.error("There was an error fetching user data");
 
-      setTheUsername("Could Not Fetch");
-      setTheAccountStatus("Could Not Fetch");
-      setTheBornOn("Could Not Fetch");
-      setTheFollowers("Could Not Fetch");
-      setTheFollowing("Could Not Fetch");
+        setTheUsername("Could Not Fetch");
+        setTheAccountStatus("Could Not Fetch");
+        setTheBornOn("Could Not Fetch");
+        setTheFollowers("Could Not Fetch");
+        setTheFollowing("Could Not Fetch");
 
-      setTheDateCreated("Could Not Fetch");
-      setTheDateUpdated("Could Not Fetch");
-    }
-  };
+        setTheDateCreated("Could Not Fetch");
+        setTheDateUpdated("Could Not Fetch");
+      }
+    };
 
-  getUserData();
+    getUserData();
+  }, []);
 
   const dateCreatedFormat: string = theDateCreated;
   const dateCreatedFormatTwo: Date = new Date(dateCreatedFormat);
@@ -113,7 +115,6 @@ const ProfilePage = () => {
       className="flex justify-center flex-col gap-10"
     >
       <CreateProfile />
-
       <div
         style={{ width: "100%", maxWidth: "600px" }}
         className="flex flex-col bg-slate-200 gap-10 p-7"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
 import Images from "./Images";
@@ -49,14 +49,6 @@ const CreateProfile = () => {
 
   const [theUsername, setTheUsername] = useState("");
   const [theAccountStatus, setTheAccountStatus] = useState("");
-  const [theBornOn, setTheBornOn] = useState("");
-  const [theFollowers, setTheFollowers] = useState("");
-  const [theFollowing, setTheFollowing] = useState("");
-  const [thePosts, setThePosts] = useState("");
-  const [theDateCreated, setTheDateCreated] = useState("");
-  const [theDateUpdated, setTheDateUpdated] = useState("");
-  const [theProfilePicture, setTheProfilePicture] = useState("");
-  const [theBannerPicture, setTheBannerPicture] = useState("");
 
   const followAction = async () => {
     try {
@@ -73,44 +65,35 @@ const CreateProfile = () => {
     }
   };
 
-  const getUserData = async () => {
-    try {
-      await axios
-        .post("/api/getUserData", {
-          username: finalUser,
-        })
-        .then((res) => {
-          console.log(res.data);
-          setTheUsername(res.data.username);
-          setTheAccountStatus(res.data.publicOrPrivate);
-          setTheBornOn(res.data.bornOn);
-          setTheFollowers(res.data.followers);
-          setTheFollowing(res.data.following);
-          setTheDateCreated(res.data.dateCreated);
-          setTheDateUpdated(res.data.dateUpdated);
-        });
-    } catch (err) {
-      toast.error("There was an error fetching user data");
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        await axios
+          .post("/api/getUserData", {
+            username: finalUser,
+          })
+          .then((res) => {
+            console.log(res.data);
+            setTheUsername(res.data.username);
+            setTheAccountStatus(res.data.publicOrPrivate);
+          });
+      } catch (err) {
+        toast.error("There was an error fetching user data");
 
-      setTheUsername("Could Not Fetch");
-      setTheAccountStatus("Could Not Fetch");
-      setTheBornOn("Could Not Fetch");
-      setTheFollowers("Could Not Fetch");
-      setTheFollowing("Could Not Fetch");
+        setTheUsername("Could Not Fetch");
+        setTheAccountStatus("Could Not Fetch");
+      }
+    };
 
-      setTheDateCreated("Could Not Fetch");
-      setTheDateUpdated("Could Not Fetch");
-    }
-  };
-
-  getUserData();
+    getUserData();
+  }, []);
 
   return (
     <div
       style={{
         width: "100%",
         maxWidth: "600px",
-        backgroundImage: `url("./tech.jpg")`,
+        backgroundImage: `url("/file.jpg")`,
         backgroundSize: "cover",
       }}
       className="flex flex-row bg-slate-200 gap-10"
@@ -129,6 +112,7 @@ const CreateProfile = () => {
             type="largeProfile"
             imageName="profilePic"
             imageUrl="/tech.jpg"
+            onClick={() => {}}
           />
         </div>
         <div className="flex items-center">

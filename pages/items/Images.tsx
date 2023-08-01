@@ -6,9 +6,15 @@ interface ImagesInterface {
   imageUrl: string;
   imageName: string;
   type: string;
+  onClick: (event: Event) => void;
 }
 
-const Images: React.FC<ImagesInterface> = ({ imageUrl, imageName, type }) => {
+const Images: React.FC<ImagesInterface> = ({
+  imageUrl,
+  imageName,
+  type,
+  onClick,
+}) => {
   const [imageUrls, setImageUrls] = useState(imageUrl);
   const [imageNames, setImageNames] = useState(imageName);
   const [types, setTypes] = useState(type);
