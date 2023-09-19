@@ -10,45 +10,18 @@ import Spinner from "./Spinner";
 import zustandStore from "@/store/zustandStore";
 
 const Posts = () => {
-  const authOn = zustandStore((state) => state.authOn);
-  const setAuthOn = zustandStore((state) => state.setAuthOn);
+  const setPopup = zustandStore((state) => state.setPopup);
   const isAuthOn = zustandStore((state) => state.isAuthOn);
-  const setIsAuthOn = zustandStore((state) => state.setIsAuthOn);
-  const authType = zustandStore((state) => state.authType);
   const setAuthType = zustandStore((state) => state.setAuthType);
-  const spin = zustandStore((state) => state.spin);
+  const userInfo = zustandStore((state) => state.userInfo);
   const setSpin = zustandStore((state) => state.setSpin);
-  const names = zustandStore((state) => state.names);
-  const setNames = zustandStore((state) => state.setNames);
-  const usernames = zustandStore((state) => state.usernames);
-  const setUsernames = zustandStore((state) => state.setUsernames);
-  const emails = zustandStore((state) => state.emails);
-  const setEmails = zustandStore((state) => state.setEmails);
-  const mongoID = zustandStore((state) => state.mongoID);
-  const setMongoID = zustandStore((state) => state.setMongoID);
-  const profilePicture = zustandStore((state) => state.profilePicture);
-  const setProfilePicture = zustandStore((state) => state.setProfilePicture);
-  const bannerPicture = zustandStore((state) => state.bannerPicture);
-  const setBannerPicture = zustandStore((state) => state.setBannerPicture);
-  const publicOrPrivate = zustandStore((state) => state.publicOrPrivate);
-  const setPublicOrPrivate = zustandStore((state) => state.setPublicOrPrivate);
-  const followers = zustandStore((state) => state.followers);
-  const setFollowers = zustandStore((state) => state.setFollowers);
-  const following = zustandStore((state) => state.following);
-  const setFollowing = zustandStore((state) => state.setFollowing);
-  const dateCreated = zustandStore((state) => state.dateCreated);
-  const setDateCreated = zustandStore((state) => state.setDateCreated);
-  const dateUpdated = zustandStore((state) => state.dateUpdated);
-  const setDateUpdated = zustandStore((state) => state.setDateUpdated);
-  const bornOn = zustandStore((state) => state.bornOn);
-  const setBornOn = zustandStore((state) => state.setBornOn);
 
   const [post, setPost] = useState("");
 
-  const dateCreatedFormat: string = dateCreated;
+  const dateCreatedFormat: string = userInfo.dateCreated;
   const dateCreatedFormatTwo: Date = new Date(dateCreatedFormat);
 
-  const dateUpdatedFormat: string = dateUpdated;
+  const dateUpdatedFormat: string = userInfo.dateUpdated;
   const dateUpdatedFormatTwo: Date = new Date(dateUpdatedFormat);
 
   const options: Intl.DateTimeFormatOptions = {
@@ -81,14 +54,14 @@ const Posts = () => {
         <>
           <div
             style={{ width: "100%", maxWidth: "600px" }}
-            className="flex flex-col bg-slate-200 gap-10 p-7"
+            className="flex flex-col bg-slate-200 gap-10 p-4"
           >
             <div className="flex items-center justify-between gap-2 flex-wrap">
-              <h1 className="text-lg">@{usernames}</h1>
+              <h1 className="text-lg">@{userInfo.username}</h1>
               <Button
                 second
                 onClick={() => {
-                  setAuthOn(true);
+                  setPopup(true);
                   setAuthType("update");
                 }}
                 placeholder="Edit"
@@ -96,14 +69,14 @@ const Posts = () => {
             </div>
             <div>
               <ul>
-                <li>Account - {publicOrPrivate}</li>
-                <li>Born on - {bornOn}</li>
+                <li>Account - {userInfo.publicOrPrivate}</li>
+                <li>Born on - {userInfo.bornOn}</li>
               </ul>
             </div>
             <div>
               <ul>
-                <li>Followers - {followers}</li>
-                <li>Following - {following}</li>
+                <li>Followers - {userInfo.followers}</li>
+                <li>Following - {userInfo.following}</li>
               </ul>
             </div>
             <div>
@@ -152,7 +125,7 @@ const Posts = () => {
             <div className="flex gap-5">
               <Button
                 onClick={() => {
-                  setAuthOn(true);
+                  setPopup(true);
                   setAuthType("signin");
                 }}
                 placeholder="Sign In"
@@ -160,7 +133,7 @@ const Posts = () => {
               />
               <Button
                 onClick={() => {
-                  setAuthOn(true);
+                  setPopup(true);
                   setAuthType("signup");
                 }}
                 placeholder="Sign Up"
