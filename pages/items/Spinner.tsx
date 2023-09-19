@@ -4,8 +4,8 @@ import { ClipLoader } from "react-spinners";
 
 const Spinner = (props: any) => {
   const isLoading = props.isLoading;
-  const authOn = zustandStore((state) => state.authOn);
-  const setAuthOn = zustandStore((state) => state.setAuthOn);
+  const popup = zustandStore((state) => state.popup);
+  const setPopup = zustandStore((state) => state.setPopup);
   const isAuthOn = zustandStore((state) => state.isAuthOn);
   const setIsAuthOn = zustandStore((state) => state.setIsAuthOn);
   const authType = zustandStore((state) => state.authType);
