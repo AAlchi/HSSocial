@@ -10,14 +10,14 @@ const Error = lazy(() => import("./components/pages/Error"));
 import { Toaster } from "react-hot-toast";
 import zustandStore from "@/store/zustandStore";
 import axios from "axios";
-const Profile = lazy(() => import("./components/pages/Profile"));
-const Settings = lazy(() => import("./components/pages/Settings"));
-const Challenge = lazy(() => import("./components/pages/Challenge"));
-const Spinner = lazy(() => import("./items/Spinner"));
-const Following = lazy(() => import("./components/pages/Following"));
-const Followers = lazy(() => import("./components/pages/Followers"));
-const Comment = lazy(() => import("./components/pages/Comment"));
-const Popup = lazy(() => import("./items/Popup"));
+import Profile from "./components/pages/Profile";
+import Settings from "./components/pages/Settings";
+import Challenge from "./components/pages/Challenge";
+import Spinner from "./items/Spinner";
+import Following from "./components/pages/Following";
+import Followers from "./components/pages/Followers";
+import Comment from "./components/pages/Comment";
+import Popup from "./items/Popup";
 
 const Comp = () => {
   const setIsAuthOn = zustandStore((state) => state.setIsAuthOn);
