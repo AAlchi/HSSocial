@@ -21,7 +21,7 @@ const Posts = () => {
     <>
       <div
         style={{ width: "100%", maxWidth: "600px" }}
-        className="flex flex-col bg-slate-200 gap-10 p-7"
+        className="flex flex-col bg-slate-200 gap-10 p-7 rounded-lg"
       >
         <div className="flex items-center justify-between gap-2 flex-wrap">
           <h1 className="text-lg">@JohnSmith</h1>
