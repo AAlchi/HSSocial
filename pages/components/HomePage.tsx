@@ -32,7 +32,7 @@ const HomePage = () => {
         <>
           <div
             style={{ height: "200px", width: "100%", maxWidth: "600px" }}
-            className="flex flex-col bg-slate-200 gap-10 p-7"
+            className="flex flex-col bg-slate-200 gap-10 p-7 rounded-lg"
           >
             {" "}
             <h1 className="text-xl">Welcome! Sign in to post something:</h1>
