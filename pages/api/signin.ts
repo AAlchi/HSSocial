@@ -13,13 +13,13 @@ export default async function handler(
   } else {
     try {
       const username = req.body.username;
-      const password = req.body.password;
+      const password = req.body.password; 
 
       const fetchedUser = await prisma.user.findUnique({
         where: { username },
       });
 
-      if (fetchedUser) {
+      if (fetchedUser) { 
         const passwordCompare = await bcrypt.compareSync(
           password,
           fetchedUser.password

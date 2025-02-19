@@ -1,10 +1,8 @@
-"use client";
-import { useEffect } from "react";
-import Sidebar from "../Sidebar";
-import ProfilePage from "../ProfilePage";
-import Popup from "../../items/Popup";
+import Sidebar from "../components/Sidebar/Sidebar";
+import SettingsPage from "./SettingsPage";
 
-const Profile = () => {
+ 
+const Settings = () => {
   return (
     <div className="flex justify-center">
       <div
@@ -12,10 +10,10 @@ const Profile = () => {
         className="p-5 flex justify-evenly md:gap-10 lg:gap-10"
       >
         <Sidebar />
-        <ProfilePage />
+        <SettingsPage /> 
       </div>
     </div>
   );
 };
 
-export default Profile;
+export default Settings;

@@ -1,11 +1,8 @@
-"use client";
-import { useEffect } from "react";
-import Sidebar from "../Sidebar";
-import HomePage from "../HomePage";
-import Popup from "../../items/Popup";
-import FollowingPage from "../FollowingPage";
+import { useEffect } from "react"; 
+import Sidebar from "../components/Sidebar/Sidebar";
+import CommentPage from "./CommentsPage";
 
-const Following = () => {
+const Comment = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   });
@@ -16,10 +13,10 @@ const Following = () => {
         className="p-5 flex justify-evenly md:gap-10 lg:gap-10"
       >
         <Sidebar />
-        <FollowingPage />
+        <CommentPage />
       </div>
     </div>
   );
 };
 
-export default Following;
+export default Comment;

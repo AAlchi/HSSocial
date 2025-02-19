@@ -1,11 +1,9 @@
-"use client";
-import zustandStore from "@/store/zustandStore";
-import Button from "../items/Button";
-import CreateProfile from "../items/CreateProfile";
-import Posts from "../items/Posts";
+import zustandStore from "@/store/zustandStore"; 
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import CreateProfile from "../components/pageComponents/items/CreateProfile";
+import Button from "../components/pageComponents/items/Button";
 
 const ProfilePage = () => {
   const userInfo = zustandStore((state) => state.userInfo);
@@ -86,11 +84,11 @@ const ProfilePage = () => {
       <CreateProfile />
       <div
         style={{ width: "100%", maxWidth: "600px" }}
-        className="flex flex-col bg-slate-200 gap-10 p-7"
+        className="flex flex-col bg-slate-200 gap-10 p-7 rounded-lg"
       >
         <div className="flex items-center justify-between gap-2 flex-wrap">
           <h1 className="text-lg">@{theUsername}</h1>
-          {finalUser === userInfo.username ? (
+          {userInfo && finalUser === userInfo.username ? (
             <Button onClick={() => {}} placeholder="Edit" second />
           ) : (
             <Button onClick={() => {}} placeholder="Follow" first />
@@ -112,7 +110,7 @@ const ProfilePage = () => {
         </div>
       </div>
       <h2 className="text-2xl text-center">Posts they created</h2>
-      <Posts />
+      {/* <Posts /> */}
     </div>
   );
 };

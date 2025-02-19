@@ -1,11 +1,12 @@
-"use client";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 interface ImagesInterface {
   imageUrl: string;
   imageName: string;
   type: string;
+  personName?: string;
   onClick: (event: Event) => void;
 }
 
@@ -13,11 +14,14 @@ const Images: React.FC<ImagesInterface> = ({
   imageUrl,
   imageName,
   type,
+  personName,
   onClick,
 }) => {
   const [imageUrls, setImageUrls] = useState(imageUrl);
   const [imageNames, setImageNames] = useState(imageName);
   const [types, setTypes] = useState(type);
+
+  const router = useRouter()
 
   return (
     <>
@@ -41,16 +45,15 @@ const Images: React.FC<ImagesInterface> = ({
             }}
           />
           <span
-            style={{
-              top: "-50%",
-              transform: "translateY(-50%)",
-              backgroundColor: "rgb(5, 5, 5, 0.6)",
-              fontSize: "20px",
+            style={{ 
+              transform: "translateY(-50%)", 
+              backgroundColor: "rgb(5, 5, 5, 0.6)", 
               cursor: "pointer",
             }}
-            className="relative text-white p-3"
+            className="relative text-white p-3 rounded-lg w-4/5 font-sm text-center"
+            onClick={() => router.push("/")}
           >
-            &Jimmy
+            @{personName}
           </span>
         </div>
       )}

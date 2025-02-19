@@ -1,18 +1,12 @@
-"use client";
-import { useState } from "react";
-import Input from "../items/Input";
-import Button from "../items/Button";
-import CreatePost from "../items/CreatePost";
-import PeopleToFollow from "../items/PeopleToFollow";
-import Posts from "../items/Posts";
 import zustandStore from "@/store/zustandStore";
+import Button from "./pageComponents/items/Button";
+import PeopleToFollow from "./pageComponents/items/PeopleToFollow";
+import CreatePost from "./pageComponents/items/CreatePost";
 
 const HomePage = () => {
-  const isAuthOn = zustandStore((state) => state.isAuthOn);
-  const setIsAuthOn = zustandStore((state) => state.setIsAuthOn);
-  const popup = zustandStore((state) => state.popup);
   const setPopup = zustandStore((state) => state.setPopup);
   const setAuthType = zustandStore((state) => state.setAuthType);
+  const isAuthOn = zustandStore((state) => state.isAuthOn);
 
   return (
     <div
@@ -26,7 +20,7 @@ const HomePage = () => {
           <h2 className="text-2xl text-center">
             {isAuthOn ? "Your Feed" : "Feed"}
           </h2>
-          <Posts />
+          {/* <Posts /> */}
         </>
       ) : (
         <>
@@ -40,8 +34,7 @@ const HomePage = () => {
               <Button
                 first
                 onClick={() => {
-                  setPopup(true);
-                  setAuthType("signin");
+                  setPopup(true); 
                 }}
                 placeholder="Sign In"
                 sideBySide
@@ -50,7 +43,7 @@ const HomePage = () => {
                 second
                 onClick={() => {
                   setPopup(true);
-                  setAuthType("signup");
+                  setAuthType("signup"); 
                 }}
                 placeholder="Sign Up"
                 sideBySide
@@ -58,7 +51,7 @@ const HomePage = () => {
             </div>
           </div>
           <h2 className="text-2xl text-center">Feed</h2>
-          <Posts />
+          {/* <Posts /> */}
         </>
       )}
     </div>

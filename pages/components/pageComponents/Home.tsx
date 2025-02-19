@@ -1,12 +1,8 @@
-"use client";
 import { useEffect } from "react";
-import Sidebar from "../Sidebar";
-import HomePage from "../HomePage";
-import Popup from "../../items/Popup";
-import Comments from "@/pages/items/CreateComments";
-import CommentPage from "../CommentsPage";
+import Sidebar from "../Sidebar/Sidebar";
+import HomePage from "../HomePage"; 
 
-const Comment = () => {
+const Home = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   });
@@ -17,10 +13,10 @@ const Comment = () => {
         className="p-5 flex justify-evenly md:gap-10 lg:gap-10"
       >
         <Sidebar />
-        <CommentPage />
+        <HomePage />
       </div>
     </div>
   );
 };
 
-export default Comment;
+export default Home;

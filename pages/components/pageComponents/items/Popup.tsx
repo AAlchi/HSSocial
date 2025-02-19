@@ -9,6 +9,7 @@ import { ClipLoader } from "react-spinners";
 import Spinner from "./Spinner";
 import zustandStore from "@/store/zustandStore";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 interface PopupInterface {
   open?: boolean;
@@ -24,6 +25,8 @@ const Popup: React.FC<PopupInterface> = ({ open }) => {
   const authType = zustandStore((state) => state.authType);
   const setAuthType = zustandStore((state) => state.setAuthType);
   const setSpin = zustandStore((state) => state.setSpin);
+  const setIsAuthOn = zustandStore((state) => state.setIsAuthOn);
+  const setUserInfo = zustandStore((state) => state.setUserInfo);
 
   //inputs
 
@@ -31,6 +34,8 @@ const Popup: React.FC<PopupInterface> = ({ open }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const router = useRouter()
 
   const handleSignin = async () => {
     if (
@@ -59,8 +64,27 @@ const Popup: React.FC<PopupInterface> = ({ open }) => {
               ).toUTCString()}; path=/`)
           );
 
+          const checkAuth = async () => {
+            try {
+              await axios
+                .get("/api/server", {
+                  withCredentials: true,
+                })
+                .then((res) => {
+                  setIsAuthOn(true);
+                  setUserInfo(res.data);
+                });
+            } catch (error) {
+              setIsAuthOn(false);
+            }
+          };
+          checkAuth();
+          
+        router.push("/"); 
+
+
         setPopup(!popup);
-        setSpin(false);
+        setSpin(false);  
         toast.success("All Signed In");
       } catch (err) {
         toast.error("Wrong username or password");
