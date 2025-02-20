@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Input from "./Input";
-import Button from "./Button";
+import Button from "../buttonComponent/Button";
 
 const Challenge = () => {
   const [post, setPost] = useState("");

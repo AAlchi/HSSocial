@@ -12,8 +12,7 @@ const Input: React.FC<InputInterface> = ({
   placeholder,
   onChange,
   disabled,
-  value,
-  sideBySide,
+  value, 
 }) => {
   return (
     <input
@@ -21,17 +20,8 @@ const Input: React.FC<InputInterface> = ({
       placeholder={placeholder}
       onChange={onChange}
       value={value}
-      disabled={disabled}
-      style={{
-        width: "100%",
-        height: "40px",
-        backgroundColor: "white",
-        color: "black",
-        outline: "none",
-        paddingLeft: "2%",
-        borderRadius: `${sideBySide ? "5px 0px 0px 5px" : "5px"}`,
-        fontSize: "15px",
-      }}
+      disabled={disabled} 
+      className="w-full py-2 bg-white text-black rounded-lg pl-3"
     />
   );
 };

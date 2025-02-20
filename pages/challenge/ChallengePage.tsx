@@ -1,5 +1,5 @@
- import Challenge from "../components/pageComponents/items/Challenge";
-import Placeholder from "../components/pageComponents/items/PlaceHolder";
+ import Challenge from "../components/pageComponents/Challenge";
+import Placeholder from "../components/pageComponents/PlaceHolder";
 
  
 

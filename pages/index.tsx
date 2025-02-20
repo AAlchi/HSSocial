@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
-import zustandStore from "@/store/zustandStore";
-import axios from "axios";
-import HomePage from "./components/HomePage";
+import zustandStore from "@/store/zustandStore";  
+import HomePage from "./components/homePageComponent/HomePage";
 import Sidebar from "./components/Sidebar/Sidebar";
-import Popup from "./components/pageComponents/items/Popup";
-import Spinner from "./components/pageComponents/items/Spinner";
+import Popup from "./components/pageComponents/Popup"; 
+import Spinner from "./components/pageComponents/Spinner";
 
 const Comp = () => { 
   const popup = zustandStore((state) => state.popup);
@@ -19,8 +18,8 @@ const Comp = () => {
       >      <Toaster />
         <Sidebar />
         <HomePage />
-        {popup && (<Popup />)}
         {spin && (<Spinner />)}
+        {popup && (<Popup />)}
       </div>
     </div>
   );

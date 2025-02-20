@@ -1,14 +1,19 @@
 import zustandStore from "@/store/zustandStore";
-import Button from "./pageComponents/items/Button";
-import PeopleToFollow from "./pageComponents/items/PeopleToFollow";
-import CreatePost from "./pageComponents/items/CreatePost";
+import Button from "../buttonComponent/Button";
+import PeopleToFollow from "../pageComponents/PeopleToFollow";
+import CreatePost from "./CreatePost";
+import Spinner from "../pageComponents/Spinner";
+import Posts from "../pageComponents/Posts";
 
 const HomePage = () => {
   const setPopup = zustandStore((state) => state.setPopup);
+  const spin = zustandStore((state) => state.spin);
   const setAuthType = zustandStore((state) => state.setAuthType);
   const isAuthOn = zustandStore((state) => state.isAuthOn);
 
   return (
+    <> 
+        
     <div
       style={{ marginTop: "56px", width: "100%", maxWidth: "600px" }}
       className="flex justify-center flex-col gap-10"
@@ -20,7 +25,7 @@ const HomePage = () => {
           <h2 className="text-2xl text-center">
             {isAuthOn ? "Your Feed" : "Feed"}
           </h2>
-          {/* <Posts /> */}
+          <Posts />
         </>
       ) : (
         <>
@@ -51,10 +56,11 @@ const HomePage = () => {
             </div>
           </div>
           <h2 className="text-2xl text-center">Feed</h2>
-          {/* <Posts /> */}
+          <Posts />
         </>
       )}
     </div>
+    </>
   );
 };
 

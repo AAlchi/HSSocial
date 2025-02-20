@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Input from "./Input";
-import Button from "./Button";
+import Button from "../buttonComponent/Button";
 import { Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";

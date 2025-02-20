@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { useEffect, useState } from "react"; 
-import Spinner from "./components/pageComponents/items/Spinner";
+import Spinner from "./components/pageComponents/Spinner";
 import zustandStore from "@/store/zustandStore";
 import axios from "axios";
 

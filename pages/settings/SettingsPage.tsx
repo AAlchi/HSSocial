@@ -1,6 +1,6 @@
 import zustandStore from "@/store/zustandStore";
-import Button from "../components/pageComponents/items/Button";
-import CreateSettings from "../components/pageComponents/items/CreateSettings";
+import Button from "../components/buttonComponent/Button";
+import CreateSettings from "../components/pageComponents/CreateSettings";
 import SettingsComp from "./SettingsComp";
 
 

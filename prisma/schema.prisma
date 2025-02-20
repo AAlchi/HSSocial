@@ -30,7 +30,7 @@ model User {
 model Post {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   message String
-  username String @unique
+  username String
   picture String
   dateCreated DateTime @default(now())
   dateUpdated DateTime @updatedAt

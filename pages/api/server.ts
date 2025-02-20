@@ -25,7 +25,7 @@ export default async function handler(
       try {
         const decodedToken: DecodedToken = jwt.verify(
           token,
-          "traypizza"
+          "tray"
         ) as DecodedToken;
 
         const userId = decodedToken.userId;

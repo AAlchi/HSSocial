@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Input from "./Input";
-import Button from "./Button";
+import Button from "../buttonComponent/Button";
 import Images from "./Images";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";

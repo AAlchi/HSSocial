@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Input from "./Input";
-import Button from "./Button";
+import Button from "../buttonComponent/Button";
 import Images from "./Images";
 import zustandStore from "@/store/zustandStore";
 import axios from "axios";
@@ -41,7 +41,6 @@ const CreateProfile = () => {
             username: finalUser,
           })
           .then((res) => {
-            console.log(res.data);
             setTheUsername(res.data.username);
             setTheAccountStatus(res.data.publicOrPrivate);
           });

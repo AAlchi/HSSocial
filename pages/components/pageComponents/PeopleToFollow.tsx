@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Input from "./Input";
-import Button from "./Button";
+import Button from "../buttonComponent/Button";
 import Images from "./Images";
 import zustandStore from "@/store/zustandStore";
 import axios from "axios";
@@ -15,13 +15,12 @@ const PeopleToFollow = () => {
 
   const [post, setPost] = useState("");
 
-  const [peopleFollow, setPeopleFollow] = useState([]);
+  const [peopleFollow, setPeopleFollow] = useState<{username: string | any}[]>([]);
 
   useEffect(() => {
     axios.get("/api/getPeopleToFollow").then((res) => setPeopleFollow(res.data));
-  }, [])
-
-  console.log(peopleFollow);
+  }, []);
+  
   return (
     <>
       {isAuthOn && (
@@ -33,8 +32,9 @@ const PeopleToFollow = () => {
                 style={{ height: "270px" }}
                 className="flex gap-3 overflow-auto"
               > 
-                {peopleFollow.map((people, index) => ( 
+                {peopleFollow.map((people: any, index: number) => ( 
                   <Images
+                    key={people.username}
                     onClick={() => { }}
                     imageUrl="/tech.jpg"
                     imageName="file"

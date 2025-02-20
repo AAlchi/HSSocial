@@ -4,7 +4,7 @@ import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
 import { MdReportProblem } from "react-icons/md";
 import Input from "./Input";
-import Button from "./Button";
+import Button from "../buttonComponent/Button";
 
 const CreateComments = () => {
   return (

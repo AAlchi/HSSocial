@@ -1,6 +1,6 @@
-import CreateFollow from "../components/pageComponents/items/CreateFollow";
-import PeopleToFollow from "../components/pageComponents/items/PeopleToFollow";
-import Placeholder from "../components/pageComponents/items/PlaceHolder";
+import CreateFollow from "../components/pageComponents/CreateFollow";
+import PeopleToFollow from "../components/pageComponents/PeopleToFollow";
+import Placeholder from "../components/pageComponents/PlaceHolder";
 
  
 

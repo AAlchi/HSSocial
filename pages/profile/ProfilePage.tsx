@@ -2,8 +2,8 @@ import zustandStore from "@/store/zustandStore";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import CreateProfile from "../components/pageComponents/items/CreateProfile";
-import Button from "../components/pageComponents/items/Button";
+import CreateProfile from "../components/pageComponents/CreateProfile";
+import Button from "../components/buttonComponent/Button";
 
 const ProfilePage = () => {
   const userInfo = zustandStore((state) => state.userInfo);
@@ -32,7 +32,6 @@ const ProfilePage = () => {
             username: finalUser,
           })
           .then((res) => {
-            console.log(res.data);
             setTheUsername(res.data.username);
             setTheAccountStatus(res.data.publicOrPrivate);
             setTheBornOn(res.data.bornOn);

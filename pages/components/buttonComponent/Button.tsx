@@ -9,22 +9,13 @@ interface ButtonInterface {
 
 const Button: React.FC<ButtonInterface> = ({
   placeholder,
-  first,
-  second,
+  first, 
   onClick,
-  disabled,
-  sideBySide,
+  disabled,  
 }) => {
   return (
-    <button
-      style={{
-        width: "120px",
-        height: "40px",
-        backgroundColor: `${first ? "red" : "white"}`,
-        color: `${first ? "white" : "red"}`,
-        fontWeight: "bold",
-        borderRadius: `${sideBySide ? "0px 2px 2px 0px" : "2px"}`,
-      }}
+    <button 
+      className={`${first ? "bg-[red] text-[white]" : "bg-[white] text-[red]"} rounded-lg font-bold px-7 py-2`}
       onClick={onClick}
       disabled={disabled}
     >

@@ -1,7 +1,7 @@
 import zustandStore from "@/store/zustandStore";
 import { useRouter } from "next/router";
 import React, { useState } from "react";  
-import Button from "../components/pageComponents/items/Button";
+import Button from "../components/buttonComponent/Button";
 
 const SettingsComp = () => {
   const setPopup = zustandStore((state) => state.setPopup);

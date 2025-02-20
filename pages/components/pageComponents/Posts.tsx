@@ -1,34 +1,45 @@
-import React, { useState } from "react";
-import Input from "./Input";
-import Button from "./Button";
+import React, { useEffect, useState } from "react"; 
 import Images from "./Images";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
-import { MdReportProblem } from "react-icons/md";
-import Comments from "./CreateComments";
-import { useNavigate } from "react-router-dom";
+import { MdReportProblem } from "react-icons/md"; 
+import { useRouter } from "next/router";
+import axios from "axios";
+import Placeholder from "./PlaceHolder";
+import Link from "next/link";
 
 const Posts = () => {
-  const [post, setPost] = useState("");
+  const [posts, setPosts] = useState<{ id: number; username: string; dateCreated: string; imageUrl: string; message: string }[] | null>(null);
 
-  const navigate = useNavigate();
+  const router = useRouter()
 
-  function nav(value: string) {
-    navigate(`/comments/post`);
+  const formatDate = (date: any) => {
+    const formattedDate = new Date(date).toLocaleString();
+    return formattedDate;
   }
+
+  useEffect(() => {
+    axios.get("/api/getPosts").then((res) => setPosts(res.data));
+  }, [])
 
   return (
     <>
-      <div
+    {posts === null ? (
+      <Placeholder placeholder="Loading..."/>
+    ) : posts.length === 0 ? (
+      <Placeholder placeholder="No Posts! Be the first to post?"/>
+    ) : (
+      posts.map((item, index) => (
+        <div
         style={{ width: "100%", maxWidth: "600px" }}
         className="flex flex-col bg-slate-200 gap-10 p-7 rounded-lg"
       >
-        <div className="flex items-center justify-between gap-2 flex-wrap">
-          <h1 className="text-lg">@JohnSmith</h1>
-          <h1 className="text-sm">Jan 4 2023</h1>
+        <div className="flex items-center justify-between gap-2 flex-wrap"> 
+          <Link href={`/user/${item.username}`}>@{item.username}</Link>
+          <h1 className="text-sm">{formatDate(item.dateCreated)}</h1>
         </div>
 
-        <div onClick={() => navigate(`/comments/post`)}>
+        <div onClick={() => router.push(`/comments/post`)}>
           <Images
             imageName="text"
             imageUrl="/tech.jpg"
@@ -37,12 +48,7 @@ const Posts = () => {
           />
         </div>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ipsa,
-          atque impedit necessitatibus voluptate facilis, eveniet tenetur,
-          pariatur corporis mollitia delectus commodi explicabo error illum nam
-          cupiditate iure architecto laboriosam magnam vel? Iure qui tempore in
-          hic, voluptatem, dolorum unde ducimus, id nihil illum nesciunt nostrum
-          porro fuga. Quaerat, sed.
+          {item.message}
         </p>
         <div className="flex gap-5">
           <div className="flex gap-1 cursor-pointer" title="Like">
@@ -62,6 +68,8 @@ const Posts = () => {
           </div>
         </div>
       </div>
+      ))
+    )} 
     </>
   );
 };

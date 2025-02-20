@@ -2,16 +2,8 @@ import zustandStore from "@/store/zustandStore";
 import React from "react";
 import { ClipLoader } from "react-spinners";
 
-const Spinner = (props: any) => {
-  const isLoading = props.isLoading;
-  const popup = zustandStore((state) => state.popup);
-  const setPopup = zustandStore((state) => state.setPopup);
-  const isAuthOn = zustandStore((state) => state.isAuthOn);
-  const setIsAuthOn = zustandStore((state) => state.setIsAuthOn);
-  const authType = zustandStore((state) => state.authType);
-  const setAuthType = zustandStore((state) => state.setAuthType);
-  const spin = zustandStore((state) => state.spin);
-  const setSpin = zustandStore((state) => state.setSpin);
+const Spinner = (props: any) => { 
+  const spin = zustandStore((state) => state.spin); 
 
   return (
     <>
