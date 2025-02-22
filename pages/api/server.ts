@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import prisma from "@/dbConfigure/prisma";
+import prisma from "@/pages/api/dbConfigure/prisma";
 import Cors from "cors";
 
 interface DecodedToken extends JwtPayload {

@@ -18,6 +18,7 @@ const Comp = () => {
       >      <Toaster />
         <Sidebar />
         <HomePage />
+        
         {spin && (<Spinner />)}
         {popup && (<Popup />)}
       </div>

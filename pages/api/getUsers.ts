@@ -7,15 +7,17 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method != "GET") {
+  if (req.method != "POST") {
     res.status(500).end();
     return;
   } else {
     try {
-      const fetchedPosts = await prisma.post.findMany();
+      const fetchedUser = await prisma.user.findUnique({
+        where: { username: req.body.username },
+      });
 
-      if (fetchedPosts) {
-        res.status(200).json(fetchedPosts);
+      if (fetchedUser) {
+        res.status(200).json(fetchedUser);
       } else {
         res.status(404).end();
       }

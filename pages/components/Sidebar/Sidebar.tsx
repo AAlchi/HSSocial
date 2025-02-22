@@ -26,8 +26,10 @@ const Sidebar = () => {
     router.push("/"); 
   };
 
-  const takeTo = (page: string) => {
-    router.push(`/${page}`);
+  const takeTo = (page: string, reload: boolean) => { 
+    router.push(`/${page}`).then(() => {
+      if (reload) { router.reload(); }
+    });
   };
 
   return (
@@ -40,7 +42,7 @@ const Sidebar = () => {
           >
             <h2
               style={{ cursor: "pointer" }}
-              onClick={() => takeTo("")}
+              onClick={() => takeTo("", false)}
               className="text-2xl"
             >
               HSS
@@ -49,7 +51,7 @@ const Sidebar = () => {
             <li
               onClick={() =>
                 isAuthOn
-                  ? takeTo(`profile/${""}`)
+                  ? takeTo(`profile?username=${userInfo?.username}`, true)
                   : setPopup(true)
               }
               style={{ cursor: "pointer" }}
@@ -59,7 +61,7 @@ const Sidebar = () => {
               <div className="hidden font-bold xl:block">Profile</div>
             </li>
             <li
-              onClick={() => takeTo("challenge")}
+              onClick={() => takeTo("challenge", false)}
               style={{ cursor: "pointer" }}
               className="text-lg font-bold-10000 flex flex-row items-center gap-1"
             >
@@ -67,7 +69,7 @@ const Sidebar = () => {
               <div className="hidden font-bold xl:block">Challenge</div>
             </li> 
             <li
-              onClick={() => (isAuthOn ? takeTo("contacts") : setPopup(true))}
+              onClick={() => (isAuthOn ? takeTo("contacts", false) : setPopup(true))}
               style={{ cursor: "pointer" }}
               className="text-lg font-bold-10000 flex flex-row items-center gap-1"
             >
@@ -75,7 +77,7 @@ const Sidebar = () => {
               <div className="hidden font-bold xl:block">Contacts</div>
             </li>
             <li
-              onClick={() => (isAuthOn ? takeTo("settings") : setPopup(true))}
+              onClick={() => (isAuthOn ? takeTo("settings", false) : setPopup(true))}
               style={{ cursor: "pointer" }}
               className="text-lg font-bold-10000 flex flex-row items-center gap-1"
             >
@@ -95,7 +97,7 @@ const Sidebar = () => {
           </ul>
         </div>
 
-        <PhoneView />
+        {/* <PhoneView /> */}
       </>
     </>
   );

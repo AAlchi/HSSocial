@@ -4,23 +4,27 @@ import Button from "../buttonComponent/Button";
 import Images from "./Images";
 import zustandStore from "@/store/zustandStore";
 import axios from "axios";
+import { useRouter } from "next/router"; 
 
 const PeopleToFollow = () => {
   //zustand 
 
   const isAuthOn = zustandStore((state) => state.isAuthOn);
-  const setIsAuthOn = zustandStore((state) => state.setIsAuthOn);
-  const authType = zustandStore((state) => state.authType);
-  const setAuthType = zustandStore((state) => state.setAuthType);
 
-  const [post, setPost] = useState("");
+  const router = useRouter()
 
-  const [peopleFollow, setPeopleFollow] = useState<{username: string | any}[]>([]);
+  const [peopleFollow, setPeopleFollow] = useState<{ username: string | any }[]>([]);
 
   useEffect(() => {
     axios.get("/api/getPeopleToFollow").then((res) => setPeopleFollow(res.data));
   }, []);
-  
+
+  const redirectUser = (username: String) => {
+    router.push(`?username=${username}`).then(() => {
+      router.reload();
+    });
+  }
+
   return (
     <>
       {isAuthOn && (
@@ -31,19 +35,41 @@ const PeopleToFollow = () => {
               <div
                 style={{ height: "270px" }}
                 className="flex gap-3 overflow-auto"
-              > 
-                {peopleFollow.map((people: any, index: number) => ( 
-                  <Images
-                    key={people.username}
-                    onClick={() => { }}
-                    imageUrl="/tech.jpg"
-                    imageName="file"
-                    personName={people.username}
-                    type="rectangle"
-                  />
+              >
+                {peopleFollow.map((people: any, index: number) => (
+                  <div key={index} className="flex flex-col items-center justify-center">
+                    <img
+                      width="120"
+                      height="200"
+                      src={people.picture}
+                      alt={people.picture}
+                      style={{
+                        minWidth: "120px",
+                        width: "120px",
+                        minHeight: "200px",
+                        height: "200px",
+                        objectFit: "cover",
+                        borderRadius: "5px",
+                        backgroundColor: "rgb(5, 5, 5, 0.3)",
+                        cursor: "pointer",
+                        border: "3px solid black",
+                      }}
+                    />
+                    <span
+                      style={{
+                        transform: "translateY(-50%)",
+                        backgroundColor: "rgb(5, 5, 5, 0.6)",
+                        cursor: "pointer",
+                      }}
+                      className="relative text-white p-3 rounded-lg w-4/5 font-sm text-center"
+                      onClick={() => redirectUser(people.username)}
+                    >
+                      @{people.username}
+                    </span>
+                  </div>
                 ))}
               </div>
-            </> 
+            </>
           </div>
         </div>
       )}

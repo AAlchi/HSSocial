@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Input from "../pageComponents/Input";
 import Button from "../buttonComponent/Button";
 import zustandStore from "@/store/zustandStore";
 import axios from "axios";
 import toast from "react-hot-toast";
+import supabase from "@/pages/api/dbConfigure/supabase";
 
 const CreatePost = () => {
   //zustand 
@@ -11,31 +12,42 @@ const CreatePost = () => {
   const setSpin = zustandStore((state) => state.setSpin); 
  
   const [message, setMessage] = useState("");
-  const [image, setImage] = useState<File | null>(null);
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setImage(e.target.files[0]);
-    }
-  };
+  const [image, setImage] = useState<any>(null);
+  const imageRef = useRef(null); 
 
   const handleSubmit = async () => {
     setSpin(true)    
 
     try {
+      let imageUrl = null; 
+
+      if (image) {
+        const filename = Date.now();
+
+        const { data, error } = await supabase.storage
+          .from("hssocial")
+          .upload(
+            `${filename}_${userInfo?.username}.jpg`,
+            image
+          );
+
+        imageUrl = supabase.storage.from("hssocial").getPublicUrl(data!.path).data.publicUrl;
+ 
+      }
+
       await axios.post("/api/createPost", {
         username: userInfo?.username,
-        message: message
+        message: message,
+        imageUrl: imageUrl
       }).then(res => {
         setSpin(false)
         toast.success("Post uploaded")
       }) 
     } catch (err) {
       setSpin(false)
-      toast.error("Post not uploaded")
+      console.log("Post not uploaded" + err)
     }
   };
-
 
   return (
     <div
@@ -60,7 +72,9 @@ const CreatePost = () => {
               <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
             </svg>
           </label>
-          <input type="file" id="imageId" hidden accept="image/*" onChange={handleFileChange} />
+          <input type="file" id="imageId" hidden accept="image/*" onChange={(e) => {
+            setImage(e?.target?.files?.[0]);
+          }} ref={imageRef}/>
         </div>
       
         <Button

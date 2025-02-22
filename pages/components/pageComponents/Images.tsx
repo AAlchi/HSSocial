@@ -16,50 +16,16 @@ const Images: React.FC<ImagesInterface> = ({
   type,
   personName,
   onClick,
-}) => {
-  const [imageUrls, setImageUrls] = useState(imageUrl);
-  const [imageNames, setImageNames] = useState(imageName);
+}) => { 
   const [types, setTypes] = useState(type);
 
   const router = useRouter()
 
   return (
-    <>
-      {types == "rectangle" && (
-        <div className="flex flex-col items-center justify-center">
-          <Image
-            width="120"
-            height="200"
-            src={imageUrl}
-            alt={imageName}
-            style={{
-              minWidth: "120px",
-              width: "120px",
-              minHeight: "200px",
-              height: "200px",
-              objectFit: "cover",
-              borderRadius: "5px",
-              backgroundColor: "rgb(5, 5, 5, 0.3)",
-              cursor: "pointer",
-              border: "3px solid black",
-            }}
-          />
-          <span
-            style={{ 
-              transform: "translateY(-50%)", 
-              backgroundColor: "rgb(5, 5, 5, 0.6)", 
-              cursor: "pointer",
-            }}
-            className="relative text-white p-3 rounded-lg w-4/5 font-sm text-center"
-            onClick={() => router.push("/")}
-          >
-            @{personName}
-          </span>
-        </div>
-      )}
+    <> 
 
       {types == "littleProfile" && (
-        <Image
+        <img
           height="50"
           width="50"
           src={imageUrl}
@@ -73,26 +39,9 @@ const Images: React.FC<ImagesInterface> = ({
             cursor: "pointer",
           }}
         />
-      )}
-
-      {types == "post" && (
-        <Image
-          height={window.innerHeight}
-          width={window.innerWidth}
-          src={imageUrl}
-          alt={imageName}
-          style={{
-            width: "100%",
-            minWidth: "100%",
-            objectFit: "cover",
-            borderRadius: "2px",
-            backgroundColor: "rgb(5, 5, 5, 0.3)",
-            cursor: "pointer",
-          }}
-        />
-      )}
+      )} 
       {types == "largeProfile" && (
-        <Image
+        <img
           width="170"
           height="170"
           src={imageUrl}

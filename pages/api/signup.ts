@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import prisma from "@/dbConfigure/prisma";
+import prisma from "@/pages/api/dbConfigure/prisma";
 import bcrypt from "bcrypt";
 
 export default async function handler(
@@ -10,27 +10,30 @@ export default async function handler(
     return res.status(500).end();
   }
 
-  const username = req.body.username;
+  const { username, email, name, password } = req.body; 
 
-  const password = req.body.password;
   try {
     const fetchedUser = await prisma.user.findUnique({
       where: { username },
     });
 
-    if (fetchedUser) {
+    const fetchedUserTwo = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (fetchedUser || fetchedUserTwo) {
       res.status(404).end();
     } else {
       const add = await prisma.user.create({
         data: {
-          name: req.body.name,
-          username: req.body.username,
-          email: req.body.email,
+          name: name,
+          username: username,
+          email: email,
           password: bcrypt.hashSync(password, 15),
           publicOrPrivate: "public",
           bornOn: "N/A",
-          followers: [""],
-          following: [""],
+          followers: [],
+          following: [],
           profilePicture: "",
           bannerPicture: "",
         },

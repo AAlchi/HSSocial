@@ -1,7 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import prisma from "@/dbConfigure/prisma";  
-import FormData from "form-data";
-import axios from "axios";
+import prisma from "@/pages/api/dbConfigure/prisma";   
  
 export default async function handler(
   req: NextApiRequest,
@@ -11,7 +9,7 @@ export default async function handler(
     return res.status(405).end();
   }
  
-  const {username, message} = req.body;  
+  const {username, message, imageUrl} = req.body;  
 
   try {  
 
@@ -21,13 +19,13 @@ export default async function handler(
 
     if (!fetchedUser) {
       return res.status(404).json({ error: "User not found" });
-    } 
+    }  
 
     const add = await prisma.post.create({
       data: {
         message: message,
         username: username,
-        picture: "imageUrl"
+        picture: imageUrl == null ? "N/A" : imageUrl
       },
     });
  
