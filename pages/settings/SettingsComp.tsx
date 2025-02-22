@@ -5,8 +5,7 @@ import Button from "../components/buttonComponent/Button";
 
 const SettingsComp = () => {
   const setPopup = zustandStore((state) => state.setPopup);
-  const isAuthOn = zustandStore((state) => state.isAuthOn);
-  const setAuthType = zustandStore((state) => state.setAuthType);
+  const isAuthOn = zustandStore((state) => state.isAuthOn); 
   const userInfo = zustandStore((state) => state.userInfo);
   const setSpin = zustandStore((state) => state.setSpin);
 
@@ -30,8 +29,7 @@ const SettingsComp = () => {
               <Button
                 second
                 onClick={() => {
-                  setPopup(true);
-                  setAuthType("update");
+                  setPopup(true); 
                 }}
                 placeholder="Edit"
               />

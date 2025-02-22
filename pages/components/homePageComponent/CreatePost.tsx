@@ -5,18 +5,23 @@ import zustandStore from "@/store/zustandStore";
 import axios from "axios";
 import toast from "react-hot-toast";
 import supabase from "@/pages/api/dbConfigure/supabase";
+import { useSession } from "next-auth/react";
 
 const CreatePost = () => {
-  //zustand 
-  const userInfo = zustandStore((state) => state.userInfo); 
-  const setSpin = zustandStore((state) => state.setSpin); 
+  //zustand    
+
+  const { data: session, status } = useSession(); 
+
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
  
   const [message, setMessage] = useState("");
   const [image, setImage] = useState<any>(null);
   const imageRef = useRef(null); 
 
   const handleSubmit = async () => {
-    setSpin(true)    
+    const loading = toast.loading("Posting...")    
 
     try {
       let imageUrl = null; 
@@ -27,7 +32,7 @@ const CreatePost = () => {
         const { data, error } = await supabase.storage
           .from("hssocial")
           .upload(
-            `${filename}_${userInfo?.username}.jpg`,
+            `${filename}_${session?.user.username}.jpg`,
             image
           );
 
@@ -36,17 +41,17 @@ const CreatePost = () => {
       }
 
       await axios.post("/api/createPost", {
-        username: userInfo?.username,
+        username: session?.user.username,
         message: message,
         imageUrl: imageUrl
       }).then(res => {
-        setSpin(false)
         toast.success("Post uploaded")
       }) 
-    } catch (err) {
-      setSpin(false)
+    } catch (err) { 
       console.log("Post not uploaded" + err)
     }
+    toast.remove(loading)
+
   };
 
   return (
@@ -55,7 +60,7 @@ const CreatePost = () => {
       className="flex flex-col bg-slate-200 gap-10 p-7 rounded-xl"
     >
       <>
-        <h1 className="text-2xl">Welcome, {userInfo && userInfo.name}</h1>
+        <h1 className="text-2xl">Welcome, {session?.user.username}</h1>
         <div className="flex">
           <Input
             type="text"

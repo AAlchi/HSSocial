@@ -16,12 +16,14 @@ const Input: React.FC<InputInterface> = ({
 }) => {
   return (
     <input
-      type={type}
-      placeholder={placeholder}
-      onChange={onChange}
-      value={value}
-      disabled={disabled} 
-      className="w-full py-2 bg-white text-black rounded-lg pl-3"
+    type={type}
+    placeholder={placeholder}
+    onChange={onChange}
+    value={typeof value === "string" ? value : ""}
+    disabled={disabled}
+    autoComplete="off"
+    aria-label={placeholder}
+    className={`w-full py-2 bg-white text-black rounded-lg pl-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500`} 
     />
   );
 };

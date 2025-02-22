@@ -18,8 +18,6 @@ interface MyState {
   setPopup: (value: boolean) => void;
   isAuthOn: boolean;
   setIsAuthOn: (value: boolean) => void;
-  authType: string;
-  setAuthType: (value: string) => void;
   userInfo: UserInfo | null;
   setUserInfo: (value: UserInfo | null) => void;
 }
@@ -31,8 +29,6 @@ const zustandStore = create<MyState>((set) => ({
   setPopup: (value) => set(() => ({ popup: value })),
   isAuthOn: false,
   setIsAuthOn: (value) => set(() => ({ isAuthOn: value })),
-  authType: "signin",
-  setAuthType: (value) => set(() => ({ authType: value })),
   userInfo: null,
   setUserInfo: (value) => set(() => ({ userInfo: value }))
 }));

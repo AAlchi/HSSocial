@@ -7,23 +7,16 @@ import { FiSettings } from "react-icons/fi";
 import zustandStore from "@/store/zustandStore";
 import { useRouter } from "next/router";
 import { PhoneView } from "./PhoneView";
+import { signOut, useSession } from "next-auth/react";
 
-const Sidebar = () => {
-  const isAuthOn = zustandStore((state) => state.isAuthOn);
+const Sidebar = () => { 
   const setPopup = zustandStore((state) => state.setPopup);
-  const setSpin = zustandStore((state) => state.setSpin);
-  const userInfo = zustandStore((state) => state.userInfo);
-  const setUserInfo = zustandStore((state) => state.setUserInfo); 
-  const setIsAuthOn = zustandStore((state) => state.setIsAuthOn);
+  const { data: session, status } = useSession();  
 
   const router = useRouter(); 
 
-  const handleLogOut = () => { 
-    setUserInfo(null); 
-    setIsAuthOn(false);
-    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
-    router.push("/"); 
+  const handleLogOut = async () => { 
+    await signOut({ callbackUrl: "/" });
   };
 
   const takeTo = (page: string, reload: boolean) => { 
@@ -50,8 +43,8 @@ const Sidebar = () => {
 
             <li
               onClick={() =>
-                isAuthOn
-                  ? takeTo(`profile?username=${userInfo?.username}`, true)
+                session
+                  ? takeTo(`profile?username=${session?.user.username}`, true)
                   : setPopup(true)
               }
               style={{ cursor: "pointer" }}
@@ -69,7 +62,7 @@ const Sidebar = () => {
               <div className="hidden font-bold xl:block">Challenge</div>
             </li> 
             <li
-              onClick={() => (isAuthOn ? takeTo("contacts", false) : setPopup(true))}
+              onClick={() => (session ? takeTo("contacts", false) : setPopup(true))}
               style={{ cursor: "pointer" }}
               className="text-lg font-bold-10000 flex flex-row items-center gap-1"
             >
@@ -77,14 +70,14 @@ const Sidebar = () => {
               <div className="hidden font-bold xl:block">Contacts</div>
             </li>
             <li
-              onClick={() => (isAuthOn ? takeTo("settings", false) : setPopup(true))}
+              onClick={() => (session ? takeTo("settings", false) : setPopup(true))}
               style={{ cursor: "pointer" }}
               className="text-lg font-bold-10000 flex flex-row items-center gap-1"
             >
               <FiSettings size={30} />
               <div className="hidden font-bold xl:block">Settings</div>
             </li>
-            {isAuthOn && (
+            {session && (
               <li
                 onClick={handleLogOut}
                 style={{ cursor: "pointer" }}

@@ -1,9 +1,10 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { useEffect, useState } from "react"; 
+import { useEffect, useState } from "react";
 import Spinner from "./components/pageComponents/Spinner";
 import zustandStore from "@/store/zustandStore";
 import axios from "axios";
+import { SessionProvider } from "next-auth/react";
 
 export default function App({ Component, pageProps }: AppProps) {
   const setIsAuthOn = zustandStore((state) => state.setIsAuthOn);
@@ -34,5 +35,9 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
   const [render, setRender] = useState(false);
   useEffect(() => setRender(true), []);
-  return render ? <Component {...pageProps} /> : <Spinner isLoading={true} />;
+  return render ? (
+    <SessionProvider>
+      <Component {...pageProps} />
+    </SessionProvider>
+  ) : <Spinner isLoading={true} />;
 }
