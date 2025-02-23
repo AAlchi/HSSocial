@@ -1,4 +1,4 @@
- import Challenge from "../components/pageComponents/Challenge";
+ import Challenge from "./Challenge";
 import Placeholder from "../components/pageComponents/PlaceHolder";
 
  
@@ -14,7 +14,7 @@ const ChallengePage = () => {
       className="flex justify-center flex-col gap-10"
     >
       <Challenge />
-      <Placeholder placeholder="Talk to one of the Hack Club leaders to join the challenge" /> 
+      <Placeholder placeholder="Talk to one of the leaders to join the challenge" /> 
     </div>
   );
 };

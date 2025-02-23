@@ -1,43 +1,29 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { useEffect, useState } from "react";
-import Spinner from "./components/pageComponents/Spinner";
+import { useEffect, useState } from "react"; 
 import zustandStore from "@/store/zustandStore";
 import axios from "axios";
 import { SessionProvider } from "next-auth/react";
+import Popup from "./components/popup/Popup";
+import { Toaster } from "react-hot-toast";
 
-export default function App({ Component, pageProps }: AppProps) {
-  const setIsAuthOn = zustandStore((state) => state.setIsAuthOn);
-  const popup = zustandStore((state) => state.popup);
-  const spin = zustandStore((state) => state.spin);
-  const userInfo = zustandStore((state) => state.userInfo);
-  const setUserInfo = zustandStore((state) => state.setUserInfo);
+export default function App({ Component, pageProps }: AppProps) { 
+  const popup = zustandStore((state) => state.popup);  
+  const setPopup = zustandStore((state) => state.setPopup);
 
   useEffect(() => {
     console.log(
       "Hold Up! This is for developers only, so be careful while using this console."
-    );
-    const checkAuth = async () => {
-      try {
-        await axios
-          .get("/api/server", {
-            withCredentials: true,
-          })
-          .then((res) => {
-            setIsAuthOn(true);
-            setUserInfo(res.data);
-          });
-      } catch (error) {
-        setIsAuthOn(false);
-      }
-    };
-    checkAuth();
+    ); 
   }, []);
+
   const [render, setRender] = useState(false);
   useEffect(() => setRender(true), []);
   return render ? (
     <SessionProvider>
       <Component {...pageProps} />
+      <Popup isOpen={popup} onClose={() => setPopup(false)} />
+      <Toaster />
     </SessionProvider>
-  ) : <Spinner isLoading={true} />;
+  ) : "Loading...";
 }

@@ -42,7 +42,7 @@ const Popup: React.FC<PopupInterface> = ({
     toast.remove(loading)
 
     if (res?.error) {
-      toast.error("Failed to log in")
+      toast.error("Wrong username or password")
     } else {
       toast.success("You're signed in!")
       onClose()

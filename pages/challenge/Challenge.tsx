@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Input from "./Input";
-import Button from "../buttonComponent/Button";
+import Input from "../components/pageComponents/Input";
+import Button from "../components/buttonComponent/Button";
 
 const Challenge = () => {
   const [post, setPost] = useState("");
@@ -8,12 +8,12 @@ const Challenge = () => {
   return (
     <div
       style={{ width: "100%", maxWidth: "600px" }}
-      className="flex flex-col bg-slate-200 gap-10 p-7"
+      className="flex flex-col bg-slate-200 gap-10 p-7 rounded-lg"
     >
       <h1 className="text-2xl">Challenge</h1>
       <div className="flex flex-col gap-5">
-        <h2>Ends on April 15 2024</h2>
-        <ul>
+        <h2>Ends on April 15 2025</h2>
+        <ul className="rounded-lg">
           <li
             className="font-bold flex items-center justify-between"
             style={{ padding: "10px", backgroundColor: "white" }}
@@ -30,7 +30,7 @@ const Challenge = () => {
             >
               1
             </p>{" "}
-            Name 1
+            John Doe
           </li>
           <li
             className="font-bold flex items-center justify-between"
@@ -48,7 +48,7 @@ const Challenge = () => {
             >
               2
             </p>{" "}
-            Name 1
+            Crew Frank
           </li>
           <li
             className="font-bold flex items-center justify-between"
@@ -66,7 +66,7 @@ const Challenge = () => {
             >
               3
             </p>{" "}
-            Name 1
+            Jamie Newton
           </li>
           <li
             className="font-bold flex items-center justify-between"
@@ -83,7 +83,7 @@ const Challenge = () => {
             >
               4
             </p>{" "}
-            Name 1
+            Melany Chase
           </li>
           <li
             className="font-bold flex items-center justify-between"
@@ -100,7 +100,7 @@ const Challenge = () => {
             >
               5
             </p>{" "}
-            Name 1
+            Ramon Powell
           </li>{" "}
           <li
             className="font-bold flex items-center justify-between"
@@ -117,7 +117,7 @@ const Challenge = () => {
             >
               6
             </p>{" "}
-            Name 1
+            Shane Robles
           </li>{" "}
           <li
             className="font-bold flex items-center justify-between"
@@ -134,7 +134,7 @@ const Challenge = () => {
             >
               7
             </p>{" "}
-            Name 1
+            Will Salazar
           </li>
         </ul>
       </div>

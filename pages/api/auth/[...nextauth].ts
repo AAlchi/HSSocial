@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "@/pages/api/dbConfigure/prisma";
 import bcrypt from "bcrypt";
@@ -10,7 +10,11 @@ declare module "next-auth" {
         username: string;
         email: string;
         image: string | null;
-        name: string | null;
+        name: string | null; 
+        accountCreated: string;
+        accountUpdated: string;
+        followers: string[];
+        following: string[];
       };
     }
   
@@ -20,11 +24,14 @@ declare module "next-auth" {
       email: string;
       image?: string;
       name?: string;
+      accountCreated: string;
+      accountUpdated: string;
+      followers: string[];
+      following: string[];
     }
   }
   
-
-export default NextAuth({
+export const authOptions: NextAuthOptions = {
     providers: [
         CredentialsProvider({
             name: "Credentials",
@@ -50,7 +57,17 @@ export default NextAuth({
                     throw new Error("Invalid password");
                 }
 
-                return { id: user.id, email: user.email, username: user.username, name: user.name, picture: user.profilePicture };
+                return { 
+                    id: user.id, 
+                    email: user.email, 
+                    username: user.username, 
+                    name: user.name, 
+                    image: user.profilePicture, 
+                    accountCreated: user.dateCreated.toISOString(), 
+                    accountUpdated: user.dateUpdated.toISOString(),
+                    followers: user.followers,
+                    following: user.following
+                };
             },
         }),
     ],
@@ -66,20 +83,33 @@ export default NextAuth({
                 token.email = user.email; 
                 token.name = user.name;
                 token.picture = user.image; 
+                token.accountCreated = user.accountCreated;
+                token.accountUpdated = user.accountUpdated;
+                token.following = user.following;
+                token.followers = user.followers;
             }
             return token;
         },
 
         async session({ session, token }) { 
             if (token) { 
-                session.user.id = token.id as string;
-                session.user.username = token.username as string;
-                session.user.email = token.email as string; 
-                session.user.name = token.name as string;
-                session.user.image = token.picture as string; 
+                session.user = {
+                    id: token.id as string,
+                    username: token.username as string,
+                    email: token.email as string, 
+                    name: token.name as string,
+                    image: token.picture as string, 
+                    accountCreated: token.accountCreated as string,
+                    accountUpdated: token.accountUpdated as string,
+                    followers: token.followers as string[],
+                    following: token.following as string[],
+                };
             }
             return session;
         },
     },
     secret: process.env.NEXTAUTH_SECRET,
-});
+};
+
+export default NextAuth(authOptions);
+

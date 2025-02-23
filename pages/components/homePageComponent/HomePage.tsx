@@ -1,24 +1,16 @@
 import zustandStore from "@/store/zustandStore";
 import Button from "../buttonComponent/Button";
 import PeopleToFollow from "../pageComponents/PeopleToFollow";
-import CreatePost from "./CreatePost";
-import Spinner from "../pageComponents/Spinner";
+import CreatePost from "./CreatePost"; 
 import Posts from "../pageComponents/Posts";
 import { useSession } from "next-auth/react";
 
 const HomePage = () => {
-  const setPopup = zustandStore((state) => state.setPopup);
-  const spin = zustandStore((state) => state.spin); 
-  const isAuthOn = zustandStore((state) => state.isAuthOn);
-  const { data: session, status } = useSession(); 
-
-  if (status === "loading") {
-    return <div>Loading...</div>;
-  }
+  const setPopup = zustandStore((state) => state.setPopup); 
+  const { data: session, status } = useSession();  
 
   return (
-    <> 
-        
+    <>  
     <div
       style={{ marginTop: "56px", width: "100%", maxWidth: "600px" }}
       className="flex justify-center flex-col gap-10"

@@ -34,7 +34,7 @@ export default async function handler(
           bornOn: "N/A",
           followers: [],
           following: [],
-          profilePicture: "",
+          profilePicture: "https://zpvnsthcgczpnrmfdbmd.supabase.co/storage/v1/object/public/hssocial//Default_pfp.jpg",
           bannerPicture: "",
         },
       });

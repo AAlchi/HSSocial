@@ -11,26 +11,14 @@ interface UserInfo {
   dateUpdated: string;
 }
 
-interface MyState {
-  spin: boolean;
-  setSpin: (value: boolean) => void;
+interface MyState { 
   popup: boolean;
-  setPopup: (value: boolean) => void;
-  isAuthOn: boolean;
-  setIsAuthOn: (value: boolean) => void;
-  userInfo: UserInfo | null;
-  setUserInfo: (value: UserInfo | null) => void;
+  setPopup: (value: boolean) => void;  
 }
 
-const zustandStore = create<MyState>((set) => ({
-  spin: false,
-  setSpin: (value) => set(() => ({ spin: value })),
+const zustandStore = create<MyState>((set) => ({ 
   popup: false,
-  setPopup: (value) => set(() => ({ popup: value })),
-  isAuthOn: false,
-  setIsAuthOn: (value) => set(() => ({ isAuthOn: value })),
-  userInfo: null,
-  setUserInfo: (value) => set(() => ({ userInfo: value }))
+  setPopup: (value) => set(() => ({ popup: value })), 
 }));
 
 export default zustandStore;

@@ -6,19 +6,18 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import supabase from "@/pages/api/dbConfigure/supabase";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const CreatePost = () => {
   //zustand    
 
-  const { data: session, status } = useSession(); 
-
-  if (status === "loading") {
-    return <div>Loading...</div>;
-  }
+  const { data: session, status } = useSession();  
  
   const [message, setMessage] = useState("");
   const [image, setImage] = useState<any>(null);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const imageRef = useRef(null); 
+  const router = useRouter()
 
   const handleSubmit = async () => {
     const loading = toast.loading("Posting...")    
@@ -52,6 +51,8 @@ const CreatePost = () => {
     }
     toast.remove(loading)
 
+    router.reload()
+
   };
 
   return (
@@ -65,7 +66,7 @@ const CreatePost = () => {
           <Input
             type="text"
             placeholder="Say something..."
-            onChange={(e) => setMessage(e.target.value)}
+            onChange={(e) => {setMessage(e.target.value), setIsButtonDisabled(false)}}
             value={message}
             disabled={false}
             sideBySide={true}
@@ -87,6 +88,7 @@ const CreatePost = () => {
             onClick={handleSubmit}
             placeholder="Post"
             sideBySide
+            disabled={isButtonDisabled}
           />
       </>
     </div>

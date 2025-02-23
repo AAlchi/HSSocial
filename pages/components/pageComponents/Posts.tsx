@@ -6,8 +6,13 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import Placeholder from "./PlaceHolder";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
-const Posts = () => {
+interface PostsInterface {
+  username?: String;
+}
+
+const Posts: React.FC<PostsInterface> = ({ username }) => {
   const [posts, setPosts] = useState<{ id: number; username: string; dateCreated: string; picture: string; message: string }[] | null>(null);
 
   const router = useRouter()
@@ -17,16 +22,26 @@ const Posts = () => {
     return formattedDate;
   }
 
-  useEffect(() => {
-    axios.get("/api/getPosts").then((res) => setPosts(res.data));
+  useEffect(() => { 
+    async function getPosts() {
+      try {
+        await axios.post("/api/getPosts", {
+          username: username ? username : ""
+        }).then((res) => setPosts(res.data)); 
+      } catch(err) {
+        toast.error("Unable to load posts")
+      }
+    }
+
+    getPosts()
   }, [])
 
   return (
     <>
-    {posts === null ? (
+    {posts == null ? (
       <Placeholder placeholder="Loading..."/>
     ) : posts.length === 0 ? (
-      <Placeholder placeholder="No Posts! Be the first to post?"/>
+      <Placeholder placeholder="No Posts! Create a post?"/>
     ) : (
       posts.map((item, index) => (
         <div
@@ -35,7 +50,7 @@ const Posts = () => {
         className="flex flex-col bg-slate-200 gap-10 p-7 rounded-lg"
       >
         <div className="flex items-center justify-between gap-2 flex-wrap"> 
-          <Link href={`/user/${item.username}`}>@{item.username}</Link>
+          <Link href={`/profile?username=${item.username}`}>@{item.username}</Link>
           <h1 className="text-sm">{formatDate(item.dateCreated)}</h1>
         </div>
 
@@ -60,7 +75,7 @@ const Posts = () => {
         <p>
           {item.message}
         </p>
-        <div className="flex gap-5">
+        {/* <div className="flex gap-5">
           <div className="flex gap-1 cursor-pointer" title="Like">
             <AiOutlineLike />
             <p className="text-xs">200</p>
@@ -73,7 +88,7 @@ const Posts = () => {
             <BiCommentDetail />
             <p className="text-xs">200</p>
           </div> 
-        </div>
+        </div> */}
       </div>
       ))
     )} 

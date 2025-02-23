@@ -5,29 +5,26 @@ import Images from "./Images";
 import zustandStore from "@/store/zustandStore";
 import axios from "axios";
 import { useRouter } from "next/router"; 
+import { useSession } from "next-auth/react";
 
-const PeopleToFollow = () => {
-  //zustand 
-
-  const isAuthOn = zustandStore((state) => state.isAuthOn);
+const PeopleToFollow = () => { 
+ const { data: session, status } = useSession();
+ 
+   if (status === "loading") {
+     return <div>Loading...</div>;
+   }
 
   const router = useRouter()
 
   const [peopleFollow, setPeopleFollow] = useState<{ username: string | any }[]>([]);
 
   useEffect(() => {
-    axios.get("/api/getPeopleToFollow").then((res) => setPeopleFollow(res.data));
-  }, []);
-
-  const redirectUser = (username: String) => {
-    router.push(`?username=${username}`).then(() => {
-      router.reload();
-    });
-  }
-
+    axios.post("/api/getUsers", {username: ""}).then((res) => setPeopleFollow(res.data));
+  }, []); 
+  
   return (
     <>
-      {isAuthOn && (
+      {session && (
         <div>
           <div className="flex flex-col bg-slate-200 gap-10 p-7 rounded-xl">
             <>
@@ -41,8 +38,8 @@ const PeopleToFollow = () => {
                     <img
                       width="120"
                       height="200"
-                      src={people.picture}
-                      alt={people.picture}
+                      src={people.profilePicture}
+                      alt={people.profilePicture}
                       style={{
                         minWidth: "120px",
                         width: "120px",
@@ -62,7 +59,7 @@ const PeopleToFollow = () => {
                         cursor: "pointer",
                       }}
                       className="relative text-white p-3 rounded-lg w-4/5 font-sm text-center"
-                      onClick={() => redirectUser(people.username)}
+                      onClick={() => router.push(`/profile?username=${people.username}`)}
                     >
                       @{people.username}
                     </span>

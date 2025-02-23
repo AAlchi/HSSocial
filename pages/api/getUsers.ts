@@ -10,19 +10,29 @@ export default async function handler(
   if (req.method != "POST") {
     res.status(500).end();
     return;
-  } else {
-    try {
-      const fetchedUser = await prisma.user.findUnique({
-        where: { username: req.body.username },
-      });
-
-      if (fetchedUser) {
-        res.status(200).json(fetchedUser);
-      } else {
-        res.status(404).end();
-      }
-    } catch (err) {
-      res.status(500).end();
-    }
   }
+
+  const username = req.body.username as string;
+
+  try {
+
+    let fetchedUsers;
+
+    if (username != "") {
+      fetchedUsers = await prisma.user.findUnique({
+        where: { username: username }
+      }); 
+    } else {
+      fetchedUsers = await prisma.user.findMany(); 
+    }
+
+    if (fetchedUsers) {
+      res.status(200).json(fetchedUsers);
+    } else {
+      res.status(404).end();
+    }
+  } catch (err) {
+    res.status(500).end();
+  }
+
 }
