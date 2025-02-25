@@ -21,6 +21,7 @@ const CreatePost = () => {
 
   const handleSubmit = async () => {
     const loading = toast.loading("Posting...")    
+    setIsButtonDisabled(true)
 
     try {
       let imageUrl = null; 
@@ -52,6 +53,7 @@ const CreatePost = () => {
     toast.remove(loading)
 
     router.reload()
+    setIsButtonDisabled(false)
 
   };
 

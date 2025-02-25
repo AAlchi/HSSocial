@@ -18,8 +18,12 @@ export default async function handler(
       const fetchedUser = await prisma.user.findUnique({
         where: { username },
       });
+      
+      const fetchedOtherUser = await prisma.user.findUnique({
+        where: { username: otherUsername },
+      });
 
-      if (!fetchedUser) {
+      if (!fetchedUser || !fetchedOtherUser) {
         return res.status(404).json({ message: "User not found "})
       }
 
@@ -42,7 +46,7 @@ export default async function handler(
         },
         data: {
             followers: {
-              set: fetchedUser.following.filter((name) => name !== username),
+              set: fetchedOtherUser.followers.filter((name) => name !== username),
             }
         }
     }) 

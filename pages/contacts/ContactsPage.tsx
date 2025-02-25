@@ -1,10 +1,8 @@
 import Placeholder from "../components/pageComponents/PlaceHolder";
 import Button from "../components/buttonComponent/Button";
 import Followers from "./differentContactTypes/Followers";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
-import toast from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import Following from "./differentContactTypes/Following";
 

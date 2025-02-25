@@ -4,14 +4,23 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import Placeholder from '@/pages/components/pageComponents/PlaceHolder';
+import toast from 'react-hot-toast';
 
 const Following = () => {
      const { data: session, status } = useSession();
     
     const [peopleFollow, setPeopleFollow] = useState<{ username: string | any }[]>([]);
     const router = useRouter()
-    useEffect(() => {
-        axios.post("/api/contacts/getFollowing", { username: session?.user.username }).then((res) => setPeopleFollow(res.data));
+    useEffect(() => { 
+        async function getData() {
+            try { 
+                await axios.post("/api/contacts/getFollowing", { username: session?.user.username }).then((res) => setPeopleFollow(res.data));
+            } catch(err)  {
+                toast.error("Couldn't load informatoin")
+            }
+        }
+
+        getData()
     }, []);
 
     return (

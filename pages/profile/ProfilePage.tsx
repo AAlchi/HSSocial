@@ -14,6 +14,7 @@ const ProfilePage = () => {
   const [user, setUser] = useState<{ name: string; username: string; dateCreated: string; publicOrPrivate: string; followers: string[]; following: string[], profilePicture: string } | null>(null);
   const [popup, setPopup] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [isPersonFollowing, setIsPersonFollowing] = useState(false)
 
   const router = useRouter()
 
@@ -22,16 +23,26 @@ const ProfilePage = () => {
     return formattedDate;
   }
 
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const fetchedUsername = urlParams.get('username');
 
-  useEffect(() => {
-    try {
-      axios.post("/api/getUsers", { username: fetchedUsername || fetchedUsername != "" ? fetchedUsername : "" }).then((res) => setUser(res.data));
-    } catch (err) {
-      toast.error("Unable to load user")
+
+  useEffect(() => { 
+    async function isPersonInFollowing() { 
+      try {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const fetchedUsername = await urlParams.get('username');
+        const res = await axios.post("/api/getUsers", { username: fetchedUsername }) 
+        
+       if (res) {
+          setUser(res.data.fetchedUsers);
+          setIsPersonFollowing(res.data.isFollowing)
+       }
+      } catch (err) {
+        console.error("Error fetching following data", err);
+      }
     }
+   
+    isPersonInFollowing()
   }, [])
 
   const { data: session, status } = useSession();
@@ -46,15 +57,17 @@ const ProfilePage = () => {
 
     try {
       const postFollowing = await axios.post("/api/contacts/addFollowing", { username: session?.user.username, otherUsername: username })
-      
+
       if (postFollowing) {
         toast.remove(loading)
         toast.success("You're now following " + user?.username)
+        setIsPersonFollowing(true)
       }
+
     } catch (err) {
       toast.error("Unable to follow")
     }
-    setIsButtonDisabled(false) 
+    setIsButtonDisabled(false)
   }
 
   async function removeFollowing(username: string) {
@@ -63,20 +76,19 @@ const ProfilePage = () => {
 
     try {
       const postFollowing = await axios.post("/api/contacts/removeFollowing", { username: session?.user.username, otherUsername: username })
-      
+
       if (postFollowing) {
         toast.remove(loading)
         toast.success("You unfollowed " + user?.username)
+        setIsPersonFollowing(false)
       }
     } catch (err) {
       toast.error("Unable to unfollow")
     }
-    setIsButtonDisabled(false) 
+    setIsButtonDisabled(false)
   }
 
-  function isPersonInFollowing() {
-    return session?.user?.following?.includes(user!.username) ?? false;
-  }
+ 
 
   return (
     <>
@@ -99,7 +111,7 @@ const ProfilePage = () => {
                 {user && session && session?.user.username == user.username ? (
                   <Button onClick={() => setPopup(true)} placeholder="Edit Pic" second />
                 ) : (
-                  isPersonInFollowing() ? (
+                  isPersonFollowing == false ? (
                     <Button onClick={() => addFollowing(user.username)} disabled={isButtonDisabled} placeholder="Follow" first />
                   ) : (
                     <Button onClick={() => removeFollowing(user.username)} disabled={isButtonDisabled} placeholder="Unfollow" />
@@ -146,7 +158,7 @@ const ProfilePage = () => {
           </>
         ) : (
           <>
-            <Placeholder placeholder="Please find a user to see their profile" />
+            <Placeholder placeholder="Loading..." />
           </>
         )}
       </div>

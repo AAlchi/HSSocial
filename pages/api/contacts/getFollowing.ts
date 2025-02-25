@@ -1,7 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/pages/api/dbConfigure/prisma";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 
 export default async function handler(
   req: NextApiRequest,

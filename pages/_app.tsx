@@ -2,7 +2,6 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { useEffect, useState } from "react"; 
 import zustandStore from "@/store/zustandStore";
-import axios from "axios";
 import { SessionProvider } from "next-auth/react";
 import Popup from "./components/popup/Popup";
 import { Toaster } from "react-hot-toast";

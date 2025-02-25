@@ -41,7 +41,7 @@ const Posts: React.FC<PostsInterface> = ({ username }) => {
     {posts == null ? (
       <Placeholder placeholder="Loading..."/>
     ) : posts.length === 0 ? (
-      <Placeholder placeholder="No Posts! Create a post?"/>
+      <Placeholder placeholder="No Posts!"/>
     ) : (
       posts.map((item, index) => (
         <div
