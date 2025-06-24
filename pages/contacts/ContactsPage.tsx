@@ -9,13 +9,13 @@ import Following from "./differentContactTypes/Following";
 
 
 const ContactsPage = () => {
+  const router = useRouter()
   const { data: session, status } = useSession();
   const [whichView, setWhichView] = useState("Followers")
 
   if (status === "loading") {
     return <div>Loading...</div>;
   }
-  const router = useRouter()
 
   return (
     <div

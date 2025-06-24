@@ -1,10 +1,10 @@
 import React from "react";
-import Images from "./Images";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
 import { MdReportProblem } from "react-icons/md";
-import Input from "./Input";
-import Button from "../buttonComponent/Button";
+import Images from "../components/pageComponents/Images";
+import Button from "../components/buttonComponent/Button";
+import Input from "../components/pageComponents/Input";
 
 const CreateComments = () => {
   return (

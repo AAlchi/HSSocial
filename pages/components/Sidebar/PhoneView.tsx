@@ -4,7 +4,7 @@ import { BiHomeAlt } from 'react-icons/bi'
 import { CgProfile } from 'react-icons/cg'
 import { FiSettings } from 'react-icons/fi'
 
-export const PhoneView = () => {
+const PhoneView = () => {
     return (
         <ul
             style={{ bottom: "0", width: "100%" }}
@@ -41,3 +41,5 @@ export const PhoneView = () => {
         </ul>
     )
 }
+
+export default PhoneView;

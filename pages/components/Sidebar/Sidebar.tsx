@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { CgProfile } from "react-icons/cg";
-import { GiShadowFollower } from "react-icons/gi";
 import { MdFollowTheSigns } from "react-icons/md";
 import { AiOutlineArrowLeft, AiOutlineTrophy } from "react-icons/ai";
 import { FiSettings } from "react-icons/fi"; 
 import zustandStore from "@/store/zustandStore";
 import { useRouter } from "next/router";
-import { PhoneView } from "./PhoneView";
 import { signOut, useSession } from "next-auth/react";
 
 const Sidebar = () => { 

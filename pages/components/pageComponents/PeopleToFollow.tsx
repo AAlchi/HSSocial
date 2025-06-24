@@ -6,13 +6,11 @@ import toast from "react-hot-toast";
 import Placeholder from "./PlaceHolder";
 
 const PeopleToFollow = () => {
+  const router = useRouter()
   const { data: session, status } = useSession();
 
-  if (status === "loading") {
-    return <div>Loading...</div>;
-  }
+  
 
-  const router = useRouter()
 
   const [peopleFollow, setPeopleFollow] = useState<{ username: string | any }[] | null>(null);
   const [message, setMessage] = useState("");
@@ -29,6 +27,10 @@ const PeopleToFollow = () => {
 
     getData()
   }, []);
+
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>

@@ -3,7 +3,7 @@ import prisma from "@/pages/api/dbConfigure/prisma";
 import { useSession } from "next-auth/react";
 import { getServerSession } from "next-auth"; 
 import { Session } from "inspector";
-import { authOptions } from "./[...nextAuth]";
+import { authOptions } from "./[...nextauth]";
 
 export default async function handler(
     req: NextApiRequest,
